@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+  background-color: #000033;
+  color: #ffffff;
+  font-family: 'Anybody', sans-serif;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-top: 20px;
+  color: #FFEB3B;
+  text-shadow: 2px 2px #ff00ff;
+}
+
+header h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  text-shadow: 1px 1px #ff00ff;
+}
+
+header h6 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-shadow: 1px 1px #ff00ff;
+}
+
+/* Form and Predictions Container */
+@keyframes pulse-border {
+  0% {
+      box-shadow: 0 0 15px #ff00ff, 0 0 0 10px rgba(255, 0, 255, 0.5);
+  }
+  100% {
+      box-shadow: 0 0 15px #ff00ff, 0 0 0 15px rgba(255, 0, 255, 0);
+  }
+}
+
+.form-container, .predictions-container {
+  background-color: #333333;
+  border: 2px solid #ff0000;
+  border-radius: 15px;
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: 0 0 15px #ff00ff;
+  animation: pulse-border 1.5s infinite alternate;
+}
+
+.form-container h2, .predictions-container h3 {
+  color: #FFA500;
+  text-shadow: 2px 2px #000000;
+}
+
+/* Adjustments for the text area wrapping */
+.form-container textarea {
+  background-color: #000;
+  color: #FFCB02;
+  border: 2px solid #00FF00;
+  margin: 5px 0;
+  width: 100%;
+  height: 80px; /* Double the height for longer predictions */
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  resize: none; /* Prevents resizing */
+  overflow: auto;
+}
+
+/* Input Fields */
+input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
+  width: 50%; /* Adjust button width */
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #00ff00;
+  background-color: #000000;
+  color: #00ff00;
+  font-size: 1rem;
+  text-shadow: 1px 1px #000000;
+}
+
+#submit-btn, #view-all-btn, #back-home-btn {
+  background-color: #FFEB3B;
+  color: #000000;
+  text-shadow: 1px 1px #000000;
+  cursor: pointer;
+}
+
+#submit-btn:hover, #view-all-btn:hover, #back-home-btn:hover {
+  background-color: #ff00ff;
+  color: #ffffff;
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 40px;
+}
+
+footer a {
+  color: #00ff00;
+  text-decoration: none;
+}
+
+footer p {
+  text-shadow: 1px 1px #000000;
+  color: #00ff00;
+}
