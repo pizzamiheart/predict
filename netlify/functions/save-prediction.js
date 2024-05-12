@@ -1,59 +1,31 @@
-// functions/save-prediction.js
-const fs = require('fs').promises;
-const path = require('path');
+// Import Airtable SDK
+const Airtable = require('airtable');
 
-const PREDICTIONS_FILE = path.join(__dirname, 'predictions.json');
+// Initialize Airtable with your API key
+const base = new Airtable({apiKey: patQnOwlngvrCERYo.b5d8aca6f9654df4ce47ce5af50e97b995d3a6a0ec477e1ef2ec7767a9f91c17}).base(appNRESV7ZVhRQZfj);
 
 exports.handler = async (event) => {
-  console.log('Received event:', event);
-
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
-    };
+    return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
 
   try {
     const { prediction, name, location } = JSON.parse(event.body);
-    console.log('Parsed input:', { prediction, name, location });
 
     if (!prediction) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Missing required fields' }),
-      };
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields' }) };
     }
 
-    let predictions = [];
-    try {
-      const fileData = await fs.readFile(PREDICTIONS_FILE, 'utf-8');
-      predictions = JSON.parse(fileData);
-    } catch (error) {
-      console.log('File does not exist or read error, creating new file...');
-      await fs.writeFile(PREDICTIONS_FILE, JSON.stringify([]));
-    }
-
-    // Add new prediction
-    predictions.push({
-      prediction,
-      name: name || 'Anonymous',
-      location: location || 'Unknown',
-      timestamp: new Date().toISOString(),
+    // Insert the new prediction into the Airtable base
+    await base('Predictions').create({
+      'Prediction': prediction,
+      'Name': name || 'Anonymous',
+      'Location': location || 'Unknown'
     });
 
-    // Write back updated predictions
-    await fs.writeFile(PREDICTIONS_FILE, JSON.stringify(predictions, null, 2));
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Prediction submitted successfully!' }),
-    };
+    return { statusCode: 200, body: JSON.stringify({ message: 'Prediction submitted successfully!' }) };
   } catch (error) {
     console.error('Error occurred:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' }),
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: 'Internal Server Error', details: error }) };
   }
 };
