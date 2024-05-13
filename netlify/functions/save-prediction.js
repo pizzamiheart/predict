@@ -1,8 +1,8 @@
 // Import Airtable SDK
 const Airtable = require('airtable');
 
-// Initialize Airtable with your API key and base ID from environment variables
-const base = new Airtable({ apiKey: process.env.Airtable_API_key }).base(process.env.airtable_base_id);
+// Initialize Airtable with your API key and base ID
+const base = new Airtable({ apiKey: process.env.Airtable_API_key }).base('appNRESV7ZVhRQZfj');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
