@@ -2,7 +2,7 @@
 const Airtable = require('airtable');
 
 // Initialize Airtable with your API key and base ID
-const base = new Airtable({ apiKey: process.env.Airtable_API_key }).base('appNRESV7ZVhRQZfj');
+const base = new Airtable({ apiKey: process.env.Airtable_API_key }).base(process.env.airtable_base_id);
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
