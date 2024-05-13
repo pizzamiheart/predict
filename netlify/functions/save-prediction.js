@@ -1,8 +1,8 @@
 // Import Airtable SDK
 const Airtable = require('airtable');
 
-// Initialize Airtable with your API key
-const base = new Airtable({apiKey: patQnOwlngvrCERYo.b5d8aca6f9654df4ce47ce5af50e97b995d3a6a0ec477e1ef2ec7767a9f91c17}).base(appNRESV7ZVhRQZfj);
+// Initialize Airtable with your API key and base ID
+const base = new Airtable({ apiKey: patQnOwlngvrCERYo.b5d8aca6f9654df4ce47ce5af50e97b995d3a6a0ec477e1ef2ec7767a9f91c17 }).base(appNRESV7ZVhRQZfj);
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -26,6 +26,6 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: JSON.stringify({ message: 'Prediction submitted successfully!' }) };
   } catch (error) {
     console.error('Error occurred:', error);
-    return { statusCode: 500, body: JSON.stringify({ error: 'Internal Server Error', details: error }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'Internal Server Error', details: error.toString() }) };
   }
 };
