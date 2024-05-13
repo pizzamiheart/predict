@@ -1,0 +1,14 @@
+{
+    "name": "predictstuff",
+    "version": "1.0.0",
+    "description": "A site to submit and view predictions.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "airtable": "^0.11.6"
+    },
+    "author": "Your Name",
+    "license": "ISC"
+}
