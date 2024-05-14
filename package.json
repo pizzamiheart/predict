@@ -1,14 +1,12 @@
 {
     "name": "predictstuff",
     "version": "1.0.0",
-    "description": "A site to submit and view predictions.",
-    "main": "index.js",
+    "description": "A site to submit and view predictions using Google Sheets as a backend.",
+    "main": "index.html",
     "scripts": {
-        "start": "node index.js"
+      "start": "open index.html"
     },
-    "dependencies": {
-        "airtable": "^0.11.6"
-    },
-    "author": "Your Name",
+    "author": "Andrew Ginn",
     "license": "ISC"
-}
+  }
+  
