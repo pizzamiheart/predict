@@ -12,7 +12,7 @@ document.getElementById('prediction-form').addEventListener('submit', async (eve
     };
   
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbyR7NWDQ5EXK0A_a5OCrODpf4q7IYPLjzrTTtpyh0I/dev/exec', {
+      const response = await fetch('https://script.google.com/macros/s/10oC-5pZxvz4rYwPZT3DY7fF-wk3FMve2L5py18eF-2CPXk1Kqwn8koml/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
