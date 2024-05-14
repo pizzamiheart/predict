@@ -1,4 +1,4 @@
-// app.js
+const apiEndpoint = 'https://script.google.com/macros/s/AKfycbxgYEn094CkbwdZaYRmkDt_Rp5bVNYvbsoln9koOfUxVaRbrx-rv14nctspsDqQ-iGI/exec';
 
 document.getElementById('prediction-form').addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -14,7 +14,7 @@ document.getElementById('prediction-form').addEventListener('submit', async (eve
     };
 
     try {
-        const response = await fetch('/.netlify/functions/save-prediction', {
+        const response = await fetch(apiEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,13 +35,9 @@ document.getElementById('prediction-form').addEventListener('submit', async (eve
     }
 });
 
-document.getElementById('view-all-btn').addEventListener('click', () => {
-    window.location.href = 'predictions.html';
-});
-
-async function loadPredictions() {
+document.getElementById('view-all-btn').addEventListener('click', async () => {
     try {
-        const response = await fetch('/.netlify/functions/list-predictions');
+        const response = await fetch(apiEndpoint);
         const predictions = await response.json();
 
         const predictionsList = document.getElementById('predictions-list');
@@ -58,7 +54,7 @@ async function loadPredictions() {
     } catch (error) {
         console.error('Error loading predictions:', error);
     }
-}
+});
 
 if (document.getElementById('predictions-list')) {
     loadPredictions();
