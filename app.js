@@ -1,61 +1,35 @@
-const apiEndpoint = 'https://script.google.com/macros/s/AKfycbxgYEn094CkbwdZaYRmkDt_Rp5bVNYvbsoln9koOfUxVaRbrx-rv14nctspsDqQ-iGI/exec';
-
 document.getElementById('prediction-form').addEventListener('submit', async (event) => {
     event.preventDefault();
-
+  
     const prediction = document.getElementById('prediction').value;
     const name = document.getElementById('name').value;
     const location = document.getElementById('location').value;
-
+  
     const formData = {
-        prediction,
-        name,
-        location,
+      prediction,
+      name,
+      location,
     };
-
+  
     try {
-        const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-            alert(result.message);
-            document.getElementById('prediction-form').reset();
-        } else {
-            alert(`Error: ${result.error}`);
-        }
+      const response = await fetch('https://script.google.com/macros/s/AKfycbyR7NWDQ5EXK0A_a5OCrODpf4q7IYPLjzrTTtpyh0I/dev/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message);
+        document.getElementById('prediction-form').reset();
+      } else {
+        alert(`Error: ${result.error}`);
+      }
     } catch (error) {
-        console.error('Error submitting prediction:', error);
-        alert('Error submitting prediction. Please try again.');
+      console.error('Error submitting prediction:', error);
+      alert('Error submitting prediction. Please try again.');
     }
-});
-
-document.getElementById('view-all-btn').addEventListener('click', async () => {
-    try {
-        const response = await fetch(apiEndpoint);
-        const predictions = await response.json();
-
-        const predictionsList = document.getElementById('predictions-list');
-        predictionsList.innerHTML = '';
-
-        predictions.forEach((prediction, index) => {
-            const predictionItem = document.createElement('li');
-            predictionItem.innerHTML = `
-                <strong>${index + 1}. ${prediction.prediction}</strong>
-                <br>by ${prediction.name || 'Anonymous'} from ${prediction.location || 'Unknown'}
-            `;
-            predictionsList.appendChild(predictionItem);
-        });
-    } catch (error) {
-        console.error('Error loading predictions:', error);
-    }
-});
-
-if (document.getElementById('predictions-list')) {
-    loadPredictions();
-}
+  });
+  
