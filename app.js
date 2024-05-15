@@ -10,8 +10,8 @@ const firebaseConfig = {
   };
   
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore(firebaseApp);
 
 // Event listener for form submission
 document.getElementById('prediction-form').addEventListener('submit', async (event) => {
