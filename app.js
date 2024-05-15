@@ -1,29 +1,58 @@
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAvzYf7shoyFOWyGKO9JX8F4pZDUJHjK50",
+    authDomain: "predict-stuff.firebaseapp.com",
+    projectId: "predict-stuff",
+    storageBucket: "predict-stuff.appspot.com",
+    messagingSenderId: "922197728160",
+    appId: "1:922197728160:web:6875810776000b04e522c5",
+    measurementId: "G-L29FL7MHCZ"
+  };
+  
+ // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Event listener for form submission
 document.getElementById('prediction-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-  
-    console.log('Submitting to:', 'https://script.google.com/macros/s/10oC-5pZxvz4rYwPZT3DY7fF-wk3FMve2L5py18eF-2CPXk1Kqwn8koml/exec');
-    console.log('Data:', data);
-  
-    try {
-      const response = await fetch('https://script.google.com/macros/s/10oC-5pZxvz4rYwPZT3DY7fF-wk3FMve2L5py18eF-2CPXk1Kqwn8koml/exec', {
-        method: 'POST',
-        mode: 'cors', // Changed from 'no-cors' to 'cors'
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      if (!response.ok) throw new Error(`HTTP status ${response.status}`);
-  
-      const result = await response.json();
-      console.log('Submission successful:', result);
-      alert('Form submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting prediction:', error);
-      alert('Error submitting prediction: ' + error.message);
-    }
+  event.preventDefault();
+  const predictionText = document.getElementById('prediction').value;
+  const userName = document.getElementById('name').value || "Anonymous";
+  const userLocation = document.getElementById('location').value || "Unknown";
+
+  try {
+    await db.collection('predictions').add({
+      name: userName,
+      location: userLocation,
+      prediction: predictionText,
+      time_stamp: firebase.firestore.FieldValue.serverTimestamp() // Ensures that the timestamp is set by the server
+    });
+    alert('Prediction submitted successfully!');
+    event.target.reset(); // Clear form after submission
+  } catch (error) {
+    console.error('Error submitting prediction:', error);
+    alert('Failed to submit prediction: ' + error.message);
+  }
+});
+
+// Function to load and display predictions
+function loadPredictions() {
+  const predictionsList = document.getElementById('predictions-list');
+  db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
+    predictionsList.innerHTML = '';
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      predictionsList.innerHTML += `<li>${data.prediction} - ${data.name}, ${data.location}</li>`;
+    });
+  }).catch(error => {
+    console.error('Error loading predictions:', error);
   });
-  
+}
+
+// Call the function to load predictions when the predictions page is loaded
+document.addEventListener('DOMContentLoaded', loadPredictions);
+
+// Event listener for the back button on predictions page
+document.getElementById('back-btn').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
