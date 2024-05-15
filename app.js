@@ -10,54 +10,57 @@ const firebaseConfig = {
   };
   
 // Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore(firebaseApp);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-// Event listener for form submission
-document.getElementById('prediction-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const predictionText = document.getElementById('prediction').value;
-  const userName = document.getElementById('name').value || "Anonymous";
-  const userLocation = document.getElementById('location').value || "Unknown";
+if (document.getElementById('prediction-form')) {
+    document.getElementById('prediction-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const predictionText = document.getElementById('prediction').value;
+        const userName = document.getElementById('name').value || "Anonymous";
+        const userLocation = document.getElementById('location').value || "Unknown";
 
-  try {
-    await db.collection('predictions').add({
-      name: userName,
-      location: userLocation,
-      prediction: predictionText,
-      time_stamp: firebase.firestore.FieldValue.serverTimestamp() // Ensures that the timestamp is set by the server
+        try {
+            await db.collection('predictions').add({
+                name: userName,
+                location: userLocation,
+                prediction: predictionText,
+                time_stamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            alert('Prediction submitted successfully!');
+            event.target.reset();
+        } catch (error) {
+            console.error('Error submitting prediction:', error);
+            alert('Failed to submit prediction: ' + error.message);
+        }
     });
-    alert('Prediction submitted successfully!');
-    event.target.reset(); // Clear form after submission
-  } catch (error) {
-    console.error('Error submitting prediction:', error);
-    alert('Failed to submit prediction: ' + error.message);
-  }
-});
-
-// Function to load and display predictions
-function loadPredictions() {
-  const predictionsList = document.getElementById('predictions-list');
-  db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
-    predictionsList.innerHTML = '';
-    querySnapshot.forEach(doc => {
-      const data = doc.data();
-      predictionsList.innerHTML += `<li>${data.prediction} - ${data.name}, ${data.location}</li>`;
-    });
-  }).catch(error => {
-    console.error('Error loading predictions:', error);
-  });
 }
 
-// Call the function to load predictions when the predictions page is loaded
+if (document.getElementById('view-all-btn')) {
+    document.getElementById('view-all-btn').addEventListener('click', () => {
+        window.location.href = 'predictions.html';
+    });
+}
+
+if (document.getElementById('back-btn')) {
+    document.getElementById('back-btn').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+}
+
+function loadPredictions() {
+    const predictionsList = document.getElementById('predictions-list');
+    if (predictionsList) {
+        db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
+            predictionsList.innerHTML = '';
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                predictionsList.innerHTML += `<li>${data.prediction} - ${data.name}, ${data.location}</li>`;
+            });
+        }).catch(error => {
+            console.error('Error loading predictions:', error);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', loadPredictions);
-
-// Event listener for the back button on predictions page
-document.getElementById('back-btn').addEventListener('click', () => {
-  window.location.href = 'index.html';
-});
-
-// Event listener for the 'View All Predictions' button
-document.getElementById('view-all-btn').addEventListener('click', () => {
-  window.location.href = 'predictions.html'; // Ensure this is the correct path to your predictions page
-});
