@@ -9,7 +9,7 @@ const firebaseConfig = {
     measurementId: "G-L29FL7MHCZ"
   };
   
- // Initialize Firebase
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -55,4 +55,9 @@ document.addEventListener('DOMContentLoaded', loadPredictions);
 // Event listener for the back button on predictions page
 document.getElementById('back-btn').addEventListener('click', () => {
   window.location.href = 'index.html';
+});
+
+// Event listener for the 'View All Predictions' button
+document.getElementById('view-all-btn').addEventListener('click', () => {
+  window.location.href = 'predictions.html'; // Ensure this is the correct path to your predictions page
 });
