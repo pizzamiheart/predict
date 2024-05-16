@@ -13,6 +13,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// Event listener for form submission
 if (document.getElementById('prediction-form')) {
     document.getElementById('prediction-form').addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -28,7 +29,7 @@ if (document.getElementById('prediction-form')) {
                 time_stamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             alert('Prediction submitted successfully!');
-            event.target.reset();
+            event.target.reset(); // Clear form after submission
         } catch (error) {
             console.error('Error submitting prediction:', error);
             alert('Failed to submit prediction: ' + error.message);
@@ -36,26 +37,43 @@ if (document.getElementById('prediction-form')) {
     });
 }
 
+// Event listener for the "View All Predictions" button
 if (document.getElementById('view-all-btn')) {
     document.getElementById('view-all-btn').addEventListener('click', () => {
         window.location.href = 'predictions.html';
     });
 }
 
+// Event listener for the back button on predictions page
 if (document.getElementById('back-btn')) {
     document.getElementById('back-btn').addEventListener('click', () => {
         window.location.href = 'index.html';
     });
 }
 
+// Function to load and display predictions
 function loadPredictions() {
-    const predictionsList = document.getElementById('predictions-list');
-    if (predictionsList) {
+    const predictionsContainer = document.getElementById('predictions-container');
+    if (predictionsContainer) {
         db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
-            predictionsList.innerHTML = '';
+            predictionsContainer.innerHTML = '';
             querySnapshot.forEach(doc => {
                 const data = doc.data();
-                predictionsList.innerHTML += `<li>${data.prediction} - ${data.name}, ${data.location}</li>`;
+                const date = data.time_stamp ? data.time_stamp.toDate() : new Date();
+                const dateString = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+                const predictionDiv = document.createElement('div');
+                predictionDiv.className = 'prediction';
+
+                predictionDiv.innerHTML = `
+                    <div class="prediction-header">
+                        <div class="prediction-name">${data.name || 'Anonymous'}, ${data.location || 'Unknown'}</div>
+                        <div class="prediction-date">${dateString}</div>
+                    </div>
+                    <div class="prediction-body">${data.prediction}</div>
+                `;
+
+                predictionsContainer.appendChild(predictionDiv);
             });
         }).catch(error => {
             console.error('Error loading predictions:', error);
@@ -63,4 +81,5 @@ function loadPredictions() {
     }
 }
 
+// Call the function to load predictions when the predictions page is loaded
 document.addEventListener('DOMContentLoaded', loadPredictions);

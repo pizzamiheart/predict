@@ -1,111 +1,126 @@
-/* General Styles */
+/* General Styling */
 body {
-  background-color: #000033;
-  color: #ffffff;
+  background-color: #1a1a1a;
+  color: #e1e1e1;
   font-family: 'Anybody', sans-serif;
+}
+
+/* Header Styling */
+header h1 {
+  font-size: 2.5em;
+  color: #ffcc00;
   text-align: center;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  margin-top: 20px;
-  color: #FFEB3B;
-  text-shadow: 2px 2px #ff00ff;
-}
-
 header h2 {
-  font-size: 1.8rem;
-  color: #ffffff;
-  text-shadow: 1px 1px #ff00ff;
+  font-size: 1.5em;
+  color: #ff66ff;
+  text-align: center;
 }
 
-header h6 {
-  font-size: 1.2rem;
-  color: #ffffff;
-  text-shadow: 1px 1px #ff00ff;
+/* Index Page Specific Styles */
+.index-container {
+  animation: pulse 1.5s infinite;
+  padding: 20px;
+  margin: 10px;
+  border: 2px solid #ffcc00;
+  border-radius: 10px;
+  background-color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Form and Predictions Container */
-@keyframes pulse-border {
+@keyframes pulse {
   0% {
-      box-shadow: 0 0 15px #ff00ff, 0 0 0 10px rgba(255, 0, 255, 0.5);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
   }
   100% {
-      box-shadow: 0 0 15px #ff00ff, 0 0 0 15px rgba(255, 0, 255, 0);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 }
 
-.form-container, .predictions-container {
-  background-color: #333333;
-  border: 2px solid #ff0000;
-  border-radius: 15px;
-  padding: 20px;
-  width: 60%;
-  margin: 0 auto;
-  margin-top: 30px;
-  box-shadow: 0 0 15px #ff00ff;
-  animation: pulse-border 1.5s infinite alternate;
-}
-
-.form-container h2, .predictions-container h3 {
-  color: #FFA500;
-  text-shadow: 2px 2px #000000;
-}
-
-/* Adjustments for the text area wrapping */
-.form-container textarea {
-  background-color: #000;
-  color: #FFCB02;
-  border: 2px solid #00FF00;
-  margin: 5px 0;
-  width: 100%;
-  height: 80px; /* Double the height for longer predictions */
-  padding: 5px;
-  border-radius: 10px;
-  font-size: 14px;
-  outline: none;
-  resize: none; /* Prevents resizing */
-  overflow: auto;
-}
-
-/* Input Fields */
-input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
-  width: 50%; /* Adjust button width */
-  padding: 10px;
-  margin: 10px auto;
-  display: block;
-  border: 2px solid #00ff00;
-  border-radius: 8px;
-  box-shadow: 0 0 5px #00ff00;
-  background-color: #000000;
-  color: #00ff00;
-  font-size: 1rem;
-  text-shadow: 1px 1px #000000;
-}
-
-#submit-btn, #view-all-btn, #back-home-btn {
-  background-color: #FFEB3B;
-  color: #000000;
-  text-shadow: 1px 1px #000000;
+/* Button Styling */
+button {
+  background-color: #ffcc00;
+  border: none;
+  padding: 10px 20px;
+  color: #1a1a1a;
+  font-size: 1em;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-#submit-btn:hover, #view-all-btn:hover, #back-home-btn:hover {
-  background-color: #ff00ff;
-  color: #ffffff;
+button:hover {
+  background-color: #ff9900;
 }
 
-/* Footer Styles */
-footer {
-  margin-top: 40px;
+/* New Styles for Predictions Page */
+.predictions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
 
-footer a {
-  color: #00ff00;
-  text-decoration: none;
+.prediction {
+  background-color: #333333;
+  border: 2px dashed #ffcc00;
+  margin: 10px;
+  padding: 15px;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px #000000;
+  position: relative;
+  animation: rotateBorder 10s linear infinite, flashBorder 5s steps(1) infinite;
 }
 
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffcc00;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.prediction-name {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.prediction-date {
+  font-size: 0.8em;
+  color: #ff66ff;
+}
+
+.prediction-body {
+  font-size: 1.2em;
+  color: #e1e1e1;
+}
+
+@keyframes rotateBorder {
+  0% {
+      border-style: dashed;
+  }
+  100% {
+      border-style: dashed;
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes flashBorder {
+  0%, 99% {
+      border-color: #ffcc00;
+  }
+  100% {
+      border-color: #ffff00;
+  }
+}
+
+/* Footer Styling */
 footer p {
-  text-shadow: 1px 1px #000000;
-  color: #00ff00;
+  text-align: center;
+  margin-top: 20px;
 }
