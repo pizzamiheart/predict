@@ -44,7 +44,7 @@ header h6 {
   margin: 0 auto;
   margin-top: 30px;
   box-shadow: 0 0 15px #ff00ff;
-  animation: pulse-border 1.5s infinite alternate;
+  animation: pulse-border 2.2s infinite alternate;
 }
 
 .form-container h2, .predictions-container h3 {
@@ -131,6 +131,14 @@ footer p {
   border: 2px solid #ff00ff;
 }
 
+@keyframes moveBorder {
+  0% { border-color: #ffcc00; }
+  25% { border-color: transparent; }
+  50% { border-color: #ffcc00; }
+  75% { border-color: transparent; }
+  100% { border-color: #ffcc00; }
+}
+
 .prediction::before {
   content: "";
   position: absolute;
@@ -139,28 +147,9 @@ footer p {
   right: 0;
   bottom: 0;
   border: 2px dashed #ffcc00;
-  border-image: linear-gradient(90deg, #ffcc00, #ffcc00) 1;
   border-radius: 10px;
-  animation: moveBorder 3s linear infinite;
+  animation: moveBorder 2.2s linear infinite;
   clip-path: inset(0px round 10px);
-}
-
-@keyframes moveBorder {
-  0% {
-    border-image-source: linear-gradient(90deg, #ffcc00, #ffcc00);
-  }
-  25% {
-    border-image-source: linear-gradient(180deg, #ffcc00, #ffcc00);
-  }
-  50% {
-    border-image-source: linear-gradient(270deg, #ffcc00, #ffcc00);
-  }
-  75% {
-    border-image-source: linear-gradient(360deg, #ffcc00, #ffcc00);
-  }
-  100% {
-    border-image-source: linear-gradient(450deg, #ffcc00, #ffcc00);
-  }
 }
 
 .prediction-header {
