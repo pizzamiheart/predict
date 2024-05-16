@@ -13,6 +13,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// Function to display success message
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerText = message;
+    document.body.appendChild(successMessage);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000); // Remove the message after 3 seconds
+}
+
 // Event listener for form submission
 if (document.getElementById('prediction-form')) {
     document.getElementById('prediction-form').addEventListener('submit', async (event) => {
@@ -28,7 +40,7 @@ if (document.getElementById('prediction-form')) {
                 prediction: predictionText,
                 time_stamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            alert('Prediction submitted successfully!');
+            showSuccessMessage('nice job, partner! we will see?');
             event.target.reset(); // Clear form after submission
         } catch (error) {
             console.error('Error submitting prediction:', error);
@@ -83,3 +95,4 @@ function loadPredictions() {
 
 // Call the function to load predictions when the predictions page is loaded
 document.addEventListener('DOMContentLoaded', loadPredictions);
+
