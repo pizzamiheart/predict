@@ -128,7 +128,7 @@ footer p {
   box-shadow: 5px 5px 15px #000000;
   position: relative;
   overflow: hidden;
-  border: 2px dashed #ffcc00;
+  border: 2px solid #ff00ff;
 }
 
 @keyframes moveBorder {
@@ -148,7 +148,7 @@ footer p {
   bottom: 0;
   border: 2px dashed #ffcc00;
   border-radius: 10px;
-  animation: moveBorder 1s linear infinite;
+  animation: moveBorder 3s linear infinite;
   clip-path: inset(0px round 10px);
 }
 
