@@ -14,19 +14,15 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Function to display success message
-function showSuccessModal() {
-    const modal = document.getElementById('success-modal');
-    const successSound = document.getElementById('success-sound');
-    modal.style.display = 'block';
-    successSound.play();
-
-    // Add blur effect to the background
-    document.body.classList.add('blur');
-
-    // Event listener for the View All Predictions button
-    document.getElementById('view-all-predictions-btn').addEventListener('click', () => {
-        window.location.href = 'predictions.html';
-    });
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerText = message;
+    document.body.appendChild(successMessage);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000); // Remove the message after 3 seconds
 }
 
 // Event listener for form submission
@@ -44,7 +40,7 @@ if (document.getElementById('prediction-form')) {
                 prediction: predictionText,
                 time_stamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            showSuccessModal();
+            showSuccessMessage('nice job, partner! we will see?');
             event.target.reset(); // Clear form after submission
         } catch (error) {
             console.error('Error submitting prediction:', error);
