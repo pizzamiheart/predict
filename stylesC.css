@@ -44,7 +44,7 @@ header h6 {
   margin: 0 auto;
   margin-top: 30px;
   box-shadow: 0 0 15px #ff00ff;
-  animation: pulse-border 2.2s infinite alternate;
+  animation: pulse-border 1.5s infinite alternate;
 }
 
 .form-container h2, .predictions-container h3 {
@@ -110,116 +110,97 @@ footer p {
   color: #00ff00;
 }
 
-/* New Styles for Predictions Page */
-.predictions-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  width: 80%; /* Center container */
-}
-
+/* Prediction Container */
 .prediction {
   background-color: #333333;
+  border: 2px dashed #FFA500;
   border-radius: 10px;
-  margin: 10px;
   padding: 15px;
-  width: 80%;
-  box-shadow: 5px 5px 15px #000000;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #ff00ff;
-}
-
-@keyframes moveBorder {
-  0% { border-color: #ffcc00; }
-  25% { border-color: transparent; }
-  50% { border-color: #ffcc00; }
-  75% { border-color: transparent; }
-  100% { border-color: #ffcc00; }
-}
-
-.prediction::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 2px dashed #ffcc00;
-  border-radius: 10px;
-  animation: moveBorders linear infinite;
-  clip-path: inset(0px round 10px);
+  margin: 10px 0;
+  animation: pulse-border 1.5s infinite alternate;
 }
 
 .prediction-header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ffcc00;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
+  align-items: center;
 }
 
 .prediction-name {
   font-weight: bold;
-  color: #ffcc00;
+  color: #FFA500;
 }
 
 .prediction-date {
-  font-size: 0.8em;
-  color: #ff66ff;
+  font-style: italic;
+  color: #FF00FF;
 }
 
 .prediction-body {
-  font-size: 1.2em;
-  color: #e1e1e1;
+  margin-top: 10px;
 }
 
-/* Success Message Styles */
-.success-message {
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #00ff00;
-  color: #000000;
-  padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-  font-size: 1rem;
   z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
 
-/* Back to Home Button */
-#back-btn {
-  background-color: #FFEB3B;
-  color: #000000;
-  text-shadow: 1px 1px #000000;
-  border: 2px solid #00ff00;
-  border-radius: 8px;
-  box-shadow: 0 0 5px #00ff00;
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 20px;
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
 }
 
-#back-btn:hover {
-  background-color: #ff00ff;
-  color: #ffffff;
+.blur {
+  filter: blur(5px);
 }
 
-/* Footer fixed at bottom */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/* Cowboy Animation */
+.cowboy-animation {
+  margin: 20px 0;
+  position: relative;
+  width: 150px;
+  height: 150px;
 }
 
-main {
-  flex: 1;
+.cowboy-animation img {
+  width: 100%;
+  height: auto;
+  position: absolute;
 }
 
-footer {
-  margin-top: auto;
+.lasso {
+  position: absolute;
+  width: 3px;
+  height: 100px;
+  background-color: #ffcc00;
+  top: 0;
+  left: 75px; /* Centered horizontally */
+  animation: throwLasso 2s forwards;
+}
+
+@keyframes throwLasso {
+  0% {
+    top: 0;
+    left: 75px;
+  }
+  50% {
+    top: 50px;
+    left: 75px;
+  }
+  100% {
+    top: 100px;
+    left: 75px;
+  }
 }
