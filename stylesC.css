@@ -284,6 +284,7 @@ footer {
   width: 100px;
   height: 100px;
   background-image: url('assets/cowboy.png');
+  animation: moveCowboy 2s infinite;
 }
 
 .drake {
@@ -372,7 +373,7 @@ footer {
 @keyframes moveCowboy {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-50px); }
-}
+}gi
 
 /* Responsive Styles */
 @media (max-width: 768px) {
