@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Predict Stuff, lol</title>
+    <title>Predict Stuff</title>
     <link rel="stylesheet" href="stylesC.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
@@ -10,36 +10,36 @@
 <body>
     <header>
         <h1>Predict Stuff, lol</h1>
+        <h2>Whatcha think's gonna happen?</h2>
+        <h6>make it interesting, partner</h6>
     </header>
     <main>
         <div class="form-container">
-            <h2>Whatcha think's gonna happen?</h2>
-            <h6>make it interesting, partner</h6>
+            <h2>Submit your prediction:</h2>
             <form id="prediction-form">
-                <textarea id="prediction" placeholder="by 2031, cows will be able make their own butter.." required></textarea>
-                <input type="text" id="name" placeholder="Name (optional):">
-                <input type="text" id="location" placeholder="Location (optional):">
+                <textarea id="prediction" required></textarea>
+                <input type="text" id="name" placeholder="Name (optional)">
+                <input type="text" id="location" placeholder="Location (optional)">
                 <button type="submit" id="submit-btn">Submit</button>
+                <button type="button" id="view-all-btn">View All Predictions</button>
             </form>
-            <button id="view-all-btn">View All Predictions</button>
         </div>
     </main>
     <footer>
         <p><a href="https://twitter.com/pizzamiheart" target="_blank">@pizzamiheart on Twitter</a> | All Rights Reserved</p>
     </footer>
 
-    <!-- Background Images -->
-    <div class="background-image earth"></div>
-    <div class="background-image hockey-stick"></div>
-    <div class="background-image basketball"></div>
-    <div class="background-image bell-pepper"></div>
-    <div class="background-image cowboy"></div>
-    <div class="background-image drake"></div>
-    <div class="background-image flip-phone"></div>
-    <div class="background-image internet"></div>
-    <div class="background-image ipod"></div>
-    <div class="background-image jeans"></div>
-    <div class="background-image lion"></div>
+    <img src="assets/earth.png" class="background-image earth" alt="earth">
+    <img src="assets/hockey.png" class="background-image hockey-stick" alt="hockey stick">
+    <img src="assets/bball.png" class="background-image basketball" alt="basketball">
+    <img src="assets/bell-pepper.png" class="background-image bell-pepper" alt="bell-pepper">
+    <img src="assets/cowboy.png" class="background-image cowboy" alt="cowboy">
+    <img src="assets/drake.png" class="background-image drake" alt="drake">
+    <img src="assets/flip.png" class="background-image flip-phone" alt="flip phone">
+    <img src="assets/internet.png" class="background-image internet" alt="internet">
+    <img src="assets/ipod.png" class="background-image ipod" alt="ipod">
+    <img src="assets/jeans.png" class="background-image jeans" alt="jeans">
+    <img src="assets/lion.png" class="background-image lion" alt="lion">
 
     <script src="app.js"></script>
 </body>
