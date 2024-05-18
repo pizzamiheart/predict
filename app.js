@@ -13,43 +13,25 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-console.log("Firebase Initialized");
-
-// Function to animate the cowboy
-function animateCowboy() {
-    console.log("Animating Cowboy");
-    const lasso = document.getElementById('lasso');
-    lasso.style.animation = 'throwLasso 2s forwards';
-}
-
 // Function to display success message
-function showSuccessModal() {
-    console.log("Showing Success Modal");
-    const modal = document.getElementById('success-modal');
-    const successSound = document.getElementById('success-sound');
-    modal.style.display = 'block';
-    successSound.play();
-    animateCowboy();
-
-    // Add blur effect to the background
-    document.body.classList.add('blur');
-
-    // Event listener for the View All Predictions button
-    document.getElementById('view-all-predictions-btn').addEventListener('click', () => {
-        window.location.href = 'predictions.html';
-    });
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerText = message;
+    document.body.appendChild(successMessage);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000); // Remove the message after 3 seconds
 }
 
 // Event listener for form submission
 if (document.getElementById('prediction-form')) {
-    console.log("Adding Event Listener to Form");
     document.getElementById('prediction-form').addEventListener('submit', async (event) => {
         event.preventDefault();
         const predictionText = document.getElementById('prediction').value;
         const userName = document.getElementById('name').value || "Anonymous";
         const userLocation = document.getElementById('location').value || "Unknown";
-
-        console.log("Form Submitted: ", { predictionText, userName, userLocation });
 
         try {
             await db.collection('predictions').add({
@@ -58,8 +40,7 @@ if (document.getElementById('prediction-form')) {
                 prediction: predictionText,
                 time_stamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            console.log("Prediction Submitted Successfully");
-            showSuccessModal();
+            showSuccessMessage('nice job, partner! we will see?');
             event.target.reset(); // Clear form after submission
         } catch (error) {
             console.error('Error submitting prediction:', error);
@@ -70,7 +51,6 @@ if (document.getElementById('prediction-form')) {
 
 // Event listener for the "View All Predictions" button
 if (document.getElementById('view-all-btn')) {
-    console.log("Adding Event Listener to View All Predictions Button");
     document.getElementById('view-all-btn').addEventListener('click', () => {
         window.location.href = 'predictions.html';
     });
@@ -78,7 +58,6 @@ if (document.getElementById('view-all-btn')) {
 
 // Event listener for the back button on predictions page
 if (document.getElementById('back-btn')) {
-    console.log("Adding Event Listener to Back Button");
     document.getElementById('back-btn').addEventListener('click', () => {
         window.location.href = 'index.html';
     });
@@ -88,7 +67,6 @@ if (document.getElementById('back-btn')) {
 function loadPredictions() {
     const predictionsContainer = document.getElementById('predictions-container');
     if (predictionsContainer) {
-        console.log("Loading Predictions");
         db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
             predictionsContainer.innerHTML = '';
             querySnapshot.forEach(doc => {
@@ -117,5 +95,4 @@ function loadPredictions() {
 
 // Call the function to load predictions when the predictions page is loaded
 document.addEventListener('DOMContentLoaded', loadPredictions);
-
 
