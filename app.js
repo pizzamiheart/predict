@@ -55,15 +55,7 @@ function loadPredictions() {
             predictionsList.innerHTML = '';
             querySnapshot.forEach(doc => {
                 const data = doc.data();
-                const date = data.time_stamp ? data.time_stamp.toDate().toLocaleString() : 'No date';
-                predictionsList.innerHTML += `
-                <div class="prediction">
-                    <div class="prediction-header">
-                        <span class="prediction-name">${data.name}, ${data.location}</span>
-                        <span class="prediction-date">${date}</span>
-                    </div>
-                    <div class="prediction-body">${data.prediction}</div>
-                </div>`;
+                predictionsList.innerHTML += `<li>${data.prediction} - ${data.name}, ${data.location}</li>`;
             });
         }).catch(error => {
             console.error('Error loading predictions:', error);
