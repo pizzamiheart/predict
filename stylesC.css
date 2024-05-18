@@ -231,7 +231,7 @@ footer {
   z-index: -1; /* Ensure the images are behind other content */
 }
 
-.earth {
+.earth-1 {
   top: 50px;
   left: 100px;
   width: 100px;
@@ -241,24 +241,14 @@ footer {
   animation: spin 10s linear infinite;
 }
 
-.earth {
-  bottom: 05px;
-  left: 100px;
-  width: 100px;
-  height: 300px;
+.earth-2 {
+  top: 200px;
+  left: 250px;
+  width: 75px;
+  height: 75px;
   background-image: url('assets/earth.png');
   background-size: cover;
-  animation: spin 10s linear infinite;
-}
-
-.earth {
-  top: 50px;
-  left: 100px;
-  width: 100px;
-  height: 200px;
-  background-image: url('assets/earth.png');
-  background-size: cover;
-  animation: spin 10s linear infinite;
+  animation: spin 20s linear infinite;
 }
 
 .hockey-stick {
@@ -268,7 +258,7 @@ footer {
   height: 150px;
   background-image: url('assets/hockey.png');
   background-size: cover;
-  animation: rock 2s ease-in-out infinite alternate;
+  animation: rock 2s linear infinite alternate;
 }
 
 .basketball {
@@ -313,39 +303,27 @@ footer {
   right: 300px;
   width: 75px;
   height: 150px;
-  background-image: url('assets/flip-phone.png');
+  background-image: url('assets/flip.png');
   background-size: cover;
-  animation: buzz 0.5s linear infinite;
+  animation: vibrate 0.3s linear infinite;
 }
 
-.internet {
+.internet-1 {
   bottom: 50px;
   right: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
   background-size: cover;
-  animation: spin 10s linear infinite;
 }
 
-.internet {
-  bottom: 200px;
-  right: 100px;
+.internet-2 {
+  top: 300px;
+  right: 150px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
   background-size: cover;
-  animation: spin 10s linear infinite;
-}
-
-.internet {
-  bottom: 50px;
-  left: 400px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/internet.png');
-  background-size: cover;
-  animation: spin 10s linear infinite;
 }
 
 .ipod {
@@ -408,10 +386,10 @@ footer {
 
 @keyframes vibrate {
   0% { transform: translate(0, 0); }
-  20% { transform: translate(-1px, 1px); }
-  40% { transform: translate(-1px, -1px); }
-  60% { transform: translate(1px, 1px); }
-  80% { transform: translate(1px, -1px); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
   100% { transform: translate(0, 0); }
 }
 
