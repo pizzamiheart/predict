@@ -13,6 +13,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+// Function to display success message
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerText = message;
+    document.body.appendChild(successMessage);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000); // Remove the message after 3 seconds
+}
+
 // Event listener for form submission
 if (document.getElementById('prediction-form')) {
     document.getElementById('prediction-form').addEventListener('submit', async (event) => {
@@ -28,9 +40,8 @@ if (document.getElementById('prediction-form')) {
                 prediction: predictionText,
                 time_stamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            console.log('Prediction submitted successfully!');
-            alert('Prediction submitted successfully!');
-            event.target.reset();
+            showSuccessMessage('nice job, partner! we will see');
+            event.target.reset(); // Clear form after submission
         } catch (error) {
             console.error('Error submitting prediction:', error);
             alert('Failed to submit prediction: ' + error.message);
@@ -38,40 +49,43 @@ if (document.getElementById('prediction-form')) {
     });
 }
 
-// Event listener for "View All Predictions" button
+// Event listener for the "View All Predictions" button
 if (document.getElementById('view-all-btn')) {
     document.getElementById('view-all-btn').addEventListener('click', () => {
-        console.log('View All Predictions button clicked');
         window.location.href = 'predictions.html';
     });
 }
 
-// Event listener for "Back to Home" button
+// Event listener for the back button on predictions page
 if (document.getElementById('back-btn')) {
     document.getElementById('back-btn').addEventListener('click', () => {
-        console.log('Back to Home button clicked');
         window.location.href = 'index.html';
     });
 }
 
-// Function to load predictions
+// Function to load and display predictions
 function loadPredictions() {
-    const predictionsList = document.getElementById('predictions-list');
-    if (predictionsList) {
+    const predictionsContainer = document.getElementById('predictions-container');
+    if (predictionsContainer) {
         db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
-            predictionsList.innerHTML = '';
+            predictionsContainer.innerHTML = '';
             querySnapshot.forEach(doc => {
                 const data = doc.data();
-                const date = data.time_stamp ? data.time_stamp.toDate().toLocaleString() : 'N/A';
-                predictionsList.innerHTML += `
-                    <div class="prediction">
-                        <div class="prediction-header">
-                            <span class="prediction-name">${data.name}, ${data.location}</span>
-                            <span class="prediction-date">${date}</span>
-                        </div>
-                        <div class="prediction-body">${data.prediction}</div>
+                const date = data.time_stamp ? data.time_stamp.toDate() : new Date();
+                const dateString = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+                const predictionDiv = document.createElement('div');
+                predictionDiv.className = 'prediction';
+
+                predictionDiv.innerHTML = `
+                    <div class="prediction-header">
+                        <div class="prediction-name">${data.name || 'Anonymous'}, ${data.location || 'Unknown'}</div>
+                        <div class="prediction-date">${dateString}</div>
                     </div>
+                    <div class="prediction-body">${data.prediction}</div>
                 `;
+
+                predictionsContainer.appendChild(predictionDiv);
             });
         }).catch(error => {
             console.error('Error loading predictions:', error);
@@ -79,10 +93,6 @@ function loadPredictions() {
     }
 }
 
-// Event listener for DOMContentLoaded to load predictions
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
-    loadPredictions();
-});
-
+// Call the function to load predictions when the predictions page is loaded
+document.addEventListener('DOMContentLoaded', loadPredictions);
 
