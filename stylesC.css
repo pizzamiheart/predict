@@ -4,7 +4,6 @@ body {
   color: #ffffff;
   font-family: 'Anybody', sans-serif;
   text-align: center;
-  overflow: hidden; /* Prevent scrolling due to background images */
 }
 
 header h1 {
@@ -41,7 +40,7 @@ header h6 {
   border: 2px solid #ff0000;
   border-radius: 15px;
   padding: 20px;
-  width: 60%;
+  width: 90%; /* Adjusted width for mobile */
   margin: 0 auto;
   margin-top: 30px;
   box-shadow: 0 0 15px #ff00ff;
@@ -71,7 +70,7 @@ header h6 {
 
 /* Input Fields */
 input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
-  width: 50%; /* Adjust button width */
+  width: 90%; /* Adjusted width for mobile */
   padding: 10px;
   margin: 10px auto;
   display: block;
@@ -125,7 +124,7 @@ footer p {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
-  width: 80%;
+  width: 90%; /* Adjusted width for mobile */
   box-shadow: 5px 5px 15px #000000;
   position: relative;
   overflow: hidden;
@@ -315,5 +314,17 @@ footer {
 .jeans {
   top: 500px;
   right: 50px;
- 
+  width: 75px;
+  height: 150px;
+  background-image: url('assets/jeans.png');
+  background-size: cover;
+}
+
+.lion {
+  bottom: 200px;
+  right: 200px;
+  width: 100px;
+  height: 100px;
+  background-image: url('assets/lion.png');
+  background-size: cover;
 }
