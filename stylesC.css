@@ -229,27 +229,15 @@ footer {
 .background-image {
   position: absolute;
   z-index: -1; /* Ensure the images are behind other content */
-  background-size: cover;
-  background-repeat: no-repeat; /* Ensure the background doesn't repeat */
 }
 
-/* Position and Size of Images */
-.earth-1 {
+.earth {
   top: 50px;
   left: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/earth.png');
-  animation: spin 20s linear infinite;
-}
-
-.earth-2 {
-  top: 140px;
-  left: 350px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/earth.png');
-  animation: spin 20s linear infinite;
+  background-size: cover;
 }
 
 .hockey-stick {
@@ -258,16 +246,16 @@ footer {
   width: 150px;
   height: 150px;
   background-image: url('assets/hockey.png');
-  animation: rock 2s linear infinite alternate;
+  background-size: cover;
 }
 
 .basketball {
-  bottom: 60px;
+  bottom: 100px;
   left: 200px;
   width: 50px;
   height: 50px;
   background-image: url('assets/bball.png');
-  animation: bounce 2s infinite;
+  background-size: cover;
 }
 
 .bell-pepper {
@@ -276,15 +264,16 @@ footer {
   width: 100px;
   height: 100px;
   background-image: url('assets/bell-pepper.png');
+  background-size: cover;
 }
 
 .cowboy {
-  bottom: 400px;
-  left: 100px;
-  width: 100px;
-  height: 100px;
+  bottom: 200px;
+  left: 50px;
+  width: 75px;
+  height: 150px;
   background-image: url('assets/cowboy.png');
-  animation: moveCowboy 4s infinite;
+  background-size: cover;
 }
 
 .drake {
@@ -293,6 +282,7 @@ footer {
   width: 100px;
   height: 100px;
   background-image: url('assets/drake.png');
+  background-size: cover;
 }
 
 .flip-phone {
@@ -301,87 +291,132 @@ footer {
   width: 75px;
   height: 150px;
   background-image: url('assets/flip.png');
-  animation: vibrate 0.3s linear infinite;
+  background-size: cover;
 }
 
-.internet-1 {
-  top: 375px;
+.internet {
+  bottom: 50px;
   right: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
-  animation: spin 20s linear infinite;
-}
-
-.internet-2 {
-  bottom: 60px;
-  left: 40px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/internet.png');
-  animation: spin 20s linear infinite;
+  background-size: cover;
 }
 
 .ipod {
   top: 400px;
   left: 100px;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 150px;
   background-image: url('assets/ipod.png');
+  background-size: cover;
 }
 
 .jeans {
   top: 500px;
   right: 50px;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 150px;
   background-image: url('assets/jeans.png');
+  background-size: cover;
 }
 
 .lion {
   bottom: 200px;
-  left: 50px;
+  right: 200px;
   width: 100px;
   height: 100px;
   background-image: url('assets/lion.png');
+  background-size: cover;
 }
 
-/* Animations */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes rock {
-  0% { transform: rotate(-5deg); }
-  100% { transform: rotate(5deg); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes vibrate {
-  0% { transform: translate(0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(-1px, -1px); }
-  75% { transform: translate(1px, -1px); }
-  100% { transform: translate(1px, 1px); }
-}
-
-@keyframes moveCowboy {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-50px); }
-}gi
-
-/* Responsive Styles */
+/* Media Queries for Mobile */
 @media (max-width: 768px) {
   .form-container, .predictions-container {
-    width: 90%;
+    width: 90%; /* Adjust container width for mobile */
+    padding: 15px;
   }
 
   input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
-    width: 90%;
+    width: 80%; /* Adjust button width for mobile */
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .earth {
+    top: 30px;
+    left: 50px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .hockey-stick {
+    top: 100px;
+    right: 30px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .basketball {
+    bottom: 50px;
+    left: 150px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .bell-pepper {
+    top: 150px;
+    right: 150px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .cowboy {
+    bottom: 150px;
+    left: 30px;
+    width: 60px;
+    height: 120px;
+  }
+
+  .drake {
+    top: 200px;
+    left: 200px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .flip-phone {
+    top: 50px;
+    right: 200px;
+    width: 60px;
+    height: 120px;
+  }
+
+  .internet {
+    bottom: 30px;
+    right: 80px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .ipod {
+    top: 300px;
+    left: 50px;
+    width: 60px;
+    height: 120px;
+  }
+
+  .jeans {
+    top: 400px;
+    right: 30px;
+    width: 60px;
+    height: 120px;
+  }
+
+  .lion {
+    bottom: 150px;
+    right: 150px;
+    width: 80px;
+    height: 80px;
   }
 }
