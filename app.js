@@ -89,7 +89,7 @@ function showModal() {
     modal.style.display = 'block';
 
     // Play sound
-    const audio = new Audio('assets/success-sound.mp3');
+    const audio = new Audio('assets/cowboyyell.mp3');
     audio.play();
 }
 
