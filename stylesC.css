@@ -7,7 +7,6 @@ body {
   overflow: hidden; /* Prevent scrolling due to background images */
 }
 
-/* Header Styles */
 header h1 {
   font-size: 2.5rem;
   margin-top: 20px;
@@ -17,6 +16,12 @@ header h1 {
 
 header h3 {
   font-size: 1.8rem;
+  color: #ffffff;
+  text-shadow: 1px 1px #ff00ff;
+}
+
+header h6 {
+  font-size: 1.2rem;
   color: #ffffff;
   text-shadow: 1px 1px #ff00ff;
 }
@@ -46,12 +51,6 @@ header h3 {
 .form-container h2, .predictions-container h3 {
   color: #FFA500;
   text-shadow: 2px 2px #000000;
-}
-
-.form-container h6 {
-  font-size: 1.2rem;
-  color: #ffffff;
-  text-shadow: 1px 1px #ff00ff;
 }
 
 /* Adjustments for the text area wrapping */
@@ -376,18 +375,6 @@ footer {
   50% { transform: translateY(-50px); }
 }
 
-/* Boombox Hover Effect */
-@keyframes jiggle {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-
-.music-player:hover {
-  transform: scale(1.2);
-  animation: jiggle 0.2s infinite;
-}
-
-
 /* Responsive Styles */
 @media (max-width: 768px) {
   .form-container, .predictions-container {
@@ -433,11 +420,6 @@ footer {
   height: auto;
 }
 
-/* Remove cowboyLasso animation */
-#cowboy {
-  animation: none;
-}
-
 button#view-all-btn-modal {
   background-color: #FFEB3B;
   color: #000;
@@ -456,25 +438,29 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Music Player Styles */
-.music-player {
+/* Boom Box Styles */
+.boom-box-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
-  border: 2px solid #fff;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #ffffff;
   border-radius: 10px;
-  background-color: #000;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background-color: #000;
+  box-shadow: 0 0 10px #ff00ff;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s;
 }
 
-.music-player img {
-  width: 100%;
+.boom-box-container:hover {
+  transform: scale(1.2);
+}
+
+.boom-box-container img {
+  width: 60px;
   height: auto;
-  display: block;
 }
