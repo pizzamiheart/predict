@@ -354,7 +354,7 @@ footer {
 
 @keyframes rock {
   0% { transform: rotate(-5deg); }
-  100% { transform: rotate(5deg); }
+   100% { transform: rotate(5deg); }
 }
 
 @keyframes bounce {
@@ -448,26 +448,19 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Boombox Styles */
-.music-container {
-  position: fixed;
+/* Music Button Animation */
+#music-button {
+  position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 70px;
-  height: 70px;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ff00;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: transform 0.3s;
+  border: 2px solid white;
+  border-radius: 5px;
 }
 
-.music-container img {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-}
-
-.music-container:hover {
-  transform: scale(1.1) rotate(10deg);
+#music-button:hover {
+  transform: scale(1.2) rotate(15deg);
 }
