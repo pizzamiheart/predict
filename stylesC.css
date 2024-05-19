@@ -14,7 +14,7 @@ header h1 {
   text-shadow: 2px 2px #ff00ff;
 }
 
-header h3 {
+header h2 {
   font-size: 1.8rem;
   color: #ffffff;
   text-shadow: 1px 1px #ff00ff;
@@ -420,6 +420,16 @@ footer {
   height: auto;
 }
 
+@keyframes cowboyLasso {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-20px) rotate(20deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+#cowboy {
+  animation: cowboyLasso 1s infinite;
+}
+
 button#view-all-btn-modal {
   background-color: #FFEB3B;
   color: #000;
@@ -438,29 +448,26 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Boom Box Styles */
-.boom-box-container {
+/* Boombox Styles */
+.music-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 80px;
-  height: 80px;
-  border: 2px solid #ffffff;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #fff;
   border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
-  box-shadow: 0 0 10px #ff00ff;
+  box-shadow: 0 0 10px #00ff00;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: all 0.3s;
 }
 
-.boom-box-container:hover {
-  transform: scale(1.2);
+.music-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
-.boom-box-container img {
-  width: 60px;
-  height: auto;
+.music-container:hover {
+  transform: scale(1.1) rotate(10deg);
 }

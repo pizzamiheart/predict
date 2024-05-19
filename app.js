@@ -13,6 +13,12 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', () => {
+    const musicPlayer = document.getElementById('music-player');
+
+    document.getElementById('boombox-button').addEventListener('click', () => {
+        toggleMusic(musicPlayer);
+    });
+
     if (document.getElementById('prediction-form')) {
         document.getElementById('prediction-form').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -58,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
-
-    const boomBox = document.getElementById('boom-box');
-    boomBox.addEventListener('click', toggleMusic);
 });
 
 function loadPredictions() {
@@ -91,9 +94,9 @@ function showModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'block';
 
-    // Play success sound
-    const successSound = document.getElementById('success-sound');
-    successSound.play();
+    // Play sound
+    const audio = document.getElementById('success-sound');
+    audio.play();
 }
 
 // Hide Modal Function
@@ -103,15 +106,10 @@ function hideModal() {
 }
 
 // Toggle Music Function
-let isMusicPlaying = false;
-function toggleMusic() {
-    const audio = document.getElementById('background-music');
-    if (isMusicPlaying) {
-        audio.pause();
+function toggleMusic(audioElement) {
+    if (audioElement.paused) {
+        audioElement.play().catch(error => console.error('Error playing music:', error));
     } else {
-        audio.play().catch(error => {
-            console.error('Error playing music:', error);
-        });
+        audioElement.pause();
     }
-    isMusicPlaying = !isMusicPlaying;
 }
