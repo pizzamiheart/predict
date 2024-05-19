@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (document.getElementById('boombox-image')) {
+        document.getElementById('boombox-image').addEventListener('click', () => {
+            toggleMusic();
+        });
+    }
+
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
@@ -88,9 +94,9 @@ function showModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'block';
 
-    // Play sound
-    const audio = new Audio('assets/cowboyyell.mp3');
-    audio.play();
+    // Play success sound
+    const successSound = document.getElementById('success-sound');
+    successSound.play();
 }
 
 // Hide Modal Function
@@ -98,3 +104,21 @@ function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
 }
+
+// Music Player Function
+function toggleMusic() {
+    const audio = document.getElementById('music-audio');
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+// Audio element for the music player
+const musicAudioElement = document.createElement('audio');
+musicAudioElement.id = 'music-audio';
+musicAudioElement.innerHTML = `
+    <source src="https://suno.com/song/ce69ec09-d646-4e57-9d15-27eb40552258" type="audio/mpeg">
+`;
+document.body.appendChild(musicAudioElement);

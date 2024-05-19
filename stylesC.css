@@ -7,6 +7,7 @@ body {
   overflow: hidden; /* Prevent scrolling due to background images */
 }
 
+/* Header Styles */
 header h1 {
   font-size: 2.5rem;
   margin-top: 20px;
@@ -14,14 +15,8 @@ header h1 {
   text-shadow: 2px 2px #ff00ff;
 }
 
-header h2 {
+header h3 {
   font-size: 1.8rem;
-  color: #ffffff;
-  text-shadow: 1px 1px #ff00ff;
-}
-
-header h6 {
-  font-size: 1.2rem;
   color: #ffffff;
   text-shadow: 1px 1px #ff00ff;
 }
@@ -51,6 +46,12 @@ header h6 {
 .form-container h2, .predictions-container h3 {
   color: #FFA500;
   text-shadow: 2px 2px #000000;
+}
+
+.form-container h6 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-shadow: 1px 1px #ff00ff;
 }
 
 /* Adjustments for the text area wrapping */
@@ -300,7 +301,7 @@ footer {
   right: 300px;
   width: 75px;
   height: 150px;
-  background-image: url('assets/flip-phone.png'); /* Fixed file name */
+  background-image: url('assets/flip-phone.png');
   animation: vibrate 0.3s linear infinite;
 }
 
@@ -373,7 +374,7 @@ footer {
 @keyframes moveCowboy {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-50px); }
-}gi
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -406,7 +407,7 @@ footer {
   margin: 15% auto;
   padding: 20px;
   border: 2px solid #ff0;
-  width: 60%; /* Adjusted width */
+  width: 80%;
   border-radius: 10px;
   text-align: center;
 }
@@ -418,6 +419,11 @@ footer {
 #cowboy {
   width: 100px;
   height: auto;
+}
+
+/* Remove cowboyLasso animation */
+#cowboy {
+  animation: none;
 }
 
 button#view-all-btn-modal {
@@ -436,4 +442,27 @@ button#view-all-btn-modal {
 button#view-all-btn-modal:hover {
   background-color: #ff00ff;
   color: #fff;
+}
+
+/* Music Player Styles */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.music-player img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
