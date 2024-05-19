@@ -109,7 +109,7 @@ function hideModal() {
 function toggleMusic() {
     const audio = document.getElementById('music-audio');
     if (audio.paused) {
-        audio.play();
+        audio.play().catch(error => console.error('Error playing music:', error));
     } else {
         audio.pause();
     }

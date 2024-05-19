@@ -376,6 +376,18 @@ footer {
   50% { transform: translateY(-50px); }
 }
 
+/* Boombox Hover Effect */
+@keyframes jiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.music-player:hover {
+  transform: scale(1.2);
+  animation: jiggle 0.2s infinite;
+}
+
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .form-container, .predictions-container {
