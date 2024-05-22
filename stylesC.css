@@ -272,7 +272,7 @@ footer {
 
 .bell-pepper {
   top: 200px;
-  right: 200px;
+  right: 60px;
   width: 100px;
   height: 100px;
   background-image: url('assets/bell-pepper.png');
@@ -290,14 +290,14 @@ footer {
 .drake {
   bottom: 50px;
   left: 15px;
-  width: 200px;
-  height: 200px;
+  width: 235px;
+  height: 235px;
   background-image: url('assets/drake.png');
 }
 
 .flip-phone {
-  top: 100px;
-  right: 300px;
+  bottom: 65px;
+  right: 150px;
   width: 100px;
   height: 100px;
   background-image: url('assets/flip-phone.png');
@@ -314,8 +314,8 @@ footer {
 }
 
 .internet-2 {
-  bottom: 60px;
-  left: 40px;
+  bottom: 400px;
+  left: 500px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
@@ -339,7 +339,7 @@ footer {
 }
 
 .lion {
-  bottom: 200px;
+  bottom: 280px;
   left: 50px;
   width: 100px;
   height: 100px;
@@ -354,7 +354,7 @@ footer {
 
 @keyframes rock {
   0% { transform: rotate(-5deg); }
-   100% { transform: rotate(5deg); }
+  100% { transform: rotate(5deg); }
 }
 
 @keyframes bounce {
@@ -376,13 +376,60 @@ footer {
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  header h2 {
+    font-size: 1.5rem;
+  }
+  header h6 {
+    font-size: 1rem;
+  }
+  .form-container, .predictions-container {
+    width: 80%;
+  }
+  input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
+    width: 80%;
+  }
+}
+
 @media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+  header h2 {
+    font-size: 1.3rem;
+  }
+  header h6 {
+    font-size: 0.9rem;
+  }
   .form-container, .predictions-container {
     width: 90%;
   }
-
   input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
     width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  header h2 {
+    font-size: 1rem;
+  }
+  header h6 {
+    font-size: 0.8rem;
+  }
+  .form-container, .predictions-container {
+    width: 95%;
+  }
+  input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
+    width: 95%;
+  }
+  .background-image {
+    display: none; /* Hide background images on very small screens */
   }
 }
 
@@ -448,7 +495,7 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Add these styles for the music player button */
+/* Add these styles for the glowing effect on the music player button */
 .music-player {
   position: absolute;
   bottom: 20px;
@@ -462,12 +509,14 @@ button#view-all-btn-modal:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.6); /* Initial glow effect */
 }
 
 .music-player:hover {
   transform: scale(1.1);
   animation: jiggle 0.3s infinite;
+  box-shadow: 0 0 30px rgba(255, 165, 0, 0.8); /* Enhanced glow on hover */
 }
 
 @keyframes jiggle {
