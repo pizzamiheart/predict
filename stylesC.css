@@ -511,20 +511,7 @@ button#view-all-btn-modal:hover {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 20px rgba(255, 165, 0, 0.6); /* Initial glow effect */
-}
-
-/* Animated circles */
-.music-player::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,165,0,0.5) 10%, transparent 10.5%);
-  background-size: 10px 10px;
-  animation: marquee 1.5s linear infinite;
+  animation: pulse 2s infinite;
 }
 
 .music-player:hover {
@@ -541,12 +528,20 @@ button#view-all-btn-modal:hover {
   100% { transform: rotate(0); }
 }
 
-@keyframes marquee {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+  }
 }
 
 .music-player img {
   width: 50px;
   height: 50px;
 }
+

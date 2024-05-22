@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isMusicPlaying = !isMusicPlaying;
     }
 
-    const musicButton = document.getElementById('music-button');
+    const musicButton = document.getElementById('music-player');
     if (musicButton) {
         musicButton.addEventListener('click', toggleMusic);
     } else {
