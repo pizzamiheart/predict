@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
         isMusicPlaying = !isMusicPlaying;
     }
 
-    const musicButton = document.getElementById('music-player');
-    if (musicButton) {
-        musicButton.addEventListener('click', toggleMusic);
+    const musicPlayer = document.getElementById('music-player');
+    if (musicPlayer) {
+        musicPlayer.addEventListener('click', toggleMusic);
     } else {
-        console.error('Music button element not found');
+        console.error('Music player element not found');
     }
 
     if (document.getElementById('prediction-form')) {
