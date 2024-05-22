@@ -513,6 +513,20 @@ button#view-all-btn-modal:hover {
   box-shadow: 0 0 20px rgba(255, 165, 0, 0.6); /* Initial glow effect */
 }
 
+/* Animated circles */
+.music-player::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,165,0,0.5) 10%, transparent 10.5%);
+  background-size: 10px 10px;
+  animation: marquee 1.5s linear infinite;
+}
+
 .music-player:hover {
   transform: scale(1.1);
   animation: jiggle 0.3s infinite;
@@ -525,6 +539,11 @@ button#view-all-btn-modal:hover {
   50% { transform: rotate(0); }
   75% { transform: rotate(5deg); }
   100% { transform: rotate(0); }
+}
+
+@keyframes marquee {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .music-player img {
