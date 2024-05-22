@@ -13,6 +13,23 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', () => {
+    const successSound = document.getElementById('success-sound');
+    const backgroundMusic = document.getElementById('background-music');
+    let isMusicPlaying = false;
+
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            backgroundMusic.pause();
+        } else {
+            backgroundMusic.play().catch(error => {
+                console.error('Error playing music:', error);
+            });
+        }
+        isMusicPlaying = !isMusicPlaying;
+    }
+
+    document.getElementById('music-button').addEventListener('click', toggleMusic);
+
     if (document.getElementById('prediction-form')) {
         document.getElementById('prediction-form').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -27,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     prediction: predictionText,
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
+                successSound.play();
                 showModal(); // Show modal instead of alert
                 event.target.reset();
             } catch (error) {
@@ -58,10 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
-
-    if (document.getElementById('music-button')) {
-        document.getElementById('music-button').addEventListener('click', toggleMusic);
-    }
 });
 
 function loadPredictions() {
@@ -92,8 +106,8 @@ function showModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'block';
 
-    // Play success sound
-    const audio = document.getElementById('success-sound');
+    // Play sound
+    const audio = new Audio('assets/success-sound.mp3');
     audio.play();
 }
 
@@ -101,16 +115,4 @@ function showModal() {
 function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
-}
-
-// Toggle Music Function
-function toggleMusic() {
-    const music = document.getElementById('background-music');
-    if (music.paused) {
-        music.play().catch(error => {
-            console.error('Error playing music:', error);
-        });
-    } else {
-        music.pause();
-    }
 }

@@ -288,18 +288,18 @@ footer {
 }
 
 .drake {
-  top: 300px;
-  left: 300px;
-  width: 100px;
-  height: 100px;
+  bottom: 50px;
+  left: 15px;
+  width: 200px;
+  height: 200px;
   background-image: url('assets/drake.png');
 }
 
 .flip-phone {
   top: 100px;
   right: 300px;
-  width: 75px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   background-image: url('assets/flip-phone.png');
   animation: vibrate 0.3s linear infinite;
 }
@@ -448,19 +448,37 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Music Button Animation */
-#music-button {
+/* Add these styles for the music player button */
+.music-player {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: transform 0.3s;
-  border: 2px solid white;
-  border-radius: 5px;
+  transition: transform 0.3s ease;
 }
 
-#music-button:hover {
-  transform: scale(1.2) rotate(15deg);
+.music-player:hover {
+  transform: scale(1.1);
+  animation: jiggle 0.3s infinite;
+}
+
+@keyframes jiggle {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(0); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0); }
+}
+
+.music-player img {
+  width: 50px;
+  height: 50px;
 }

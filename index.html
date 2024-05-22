@@ -9,12 +9,13 @@
 </head>
 <body>
     <header>
-        <h2>The Future Starts When You Finish This Sentence</h2>
-        <h4>make it interesting, partner</h4>
+        <h1>The Future Starts When You Finish This Sentence</h1>
+        <h3>Whatcha think's gonna happen?</h3>
     </header>
     <main>
         <div class="form-container">
             <h2>Submit your prediction:</h2>
+            <h6>make it interesting, partner</h6>
             <form id="prediction-form">
                 <textarea id="prediction" placeholder="by 2031, cows will make their own butter..." required></textarea>
                 <input type="text" id="name" placeholder="name/xtwitter handle" required>
@@ -34,13 +35,18 @@
             </div>
         </div>
 
-        <!-- Audio elements -->
+        <!-- Audio elements for the success sound and background music -->
         <audio id="success-sound">
             <source src="assets/cowboyyell.mp3" type="audio/mpeg">
         </audio>
-        <audio id="background-music">
+        <audio id="background-music" loop>
             <source src="https://suno.com/song/ce69ec09-d646-4e57-9d15-27eb40552258" type="audio/mpeg">
         </audio>
+
+        <!-- Boombox music player button -->
+        <div class="music-player" id="music-player">
+            <img src="assets/boom.box.png" alt="Music Player" id="music-button">
+        </div>
     </main>
     <footer>
         <p><a href="https://twitter.com/pizzamiheart" target="_blank">@pizzamiheart on Twitter</a> | All Rights Reserved</p>
@@ -60,11 +66,6 @@
     <img src="assets/jeans.png" class="background-image jeans" alt="jeans">
     <img src="assets/lion.png" class="background-image lion" alt="lion">
 
-     <!-- Music Container -->
-     <div class="music-container" id="music-button">
-        <img src="assets/boom.box.png" alt="Boombox">
-    </div>
-    
     <script src="app.js"></script>
 </body>
 </html>
