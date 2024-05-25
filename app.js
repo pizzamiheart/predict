@@ -16,16 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const successSound = document.getElementById('success-sound');
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
+    let isPlayingPromise = null;
 
     function toggleMusic() {
         if (isMusicPlaying) {
-            backgroundMusic.pause();
+            if (isPlayingPromise !== null) {
+                isPlayingPromise.then(() => {
+                    backgroundMusic.pause();
+                    isMusicPlaying = false;
+                    isPlayingPromise = null;
+                }).catch(error => {
+                    console.error('Error pausing music:', error);
+                });
+            } else {
+                backgroundMusic.pause();
+                isMusicPlaying = false;
+            }
         } else {
-            backgroundMusic.play().catch(error => {
+            isPlayingPromise = backgroundMusic.play().catch(error => {
                 console.error('Error playing music:', error);
+                isPlayingPromise = null;
+            }).finally(() => {
+                isMusicPlaying = true;
             });
         }
-        isMusicPlaying = !isMusicPlaying;
     }
 
     const musicPlayer = document.getElementById('music-player');
@@ -54,8 +68,7 @@ function setupEventListeners() {
                     prediction: predictionText,
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                const successSound = document.getElementById('success-sound');
-                successSound.play();
+                playSuccessSound();
                 showModal(); // Show modal instead of alert
                 event.target.reset();
             } catch (error) {
@@ -107,6 +120,17 @@ observer.observe(document.body, {
     subtree: true,
 });
 
+setupEventListeners();
+
+function playSuccessSound() {
+    const successSound = document.getElementById('success-sound');
+    if (successSound) {
+        successSound.play().catch(error => {
+            console.error('Error playing success sound:', error);
+        });
+    }
+}
+
 function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
     if (predictionsList) {
@@ -136,8 +160,7 @@ function showModal() {
     modal.style.display = 'block';
 
     // Play sound
-    const audio = new Audio('assets/success-sound.mp3');
-    audio.play();
+    playSuccessSound();
 }
 
 // Hide Modal Function
