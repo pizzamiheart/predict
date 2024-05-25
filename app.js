@@ -12,29 +12,29 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const successSound = document.getElementById('success-sound');
-    const backgroundMusic = document.getElementById('background-music');
-    let isMusicPlaying = false;
+const successSound = document.getElementById('success-sound');
+const backgroundMusic = document.getElementById('background-music');
+let isMusicPlaying = false;
 
-    function toggleMusic() {
-        if (isMusicPlaying) {
-            backgroundMusic.pause();
-        } else {
-            backgroundMusic.play().catch(error => {
-                console.error('Error playing music:', error);
-            });
-        }
-        isMusicPlaying = !isMusicPlaying;
-    }
-
-    const musicPlayer = document.getElementById('music-player');
-    if (musicPlayer) {
-        musicPlayer.addEventListener('click', toggleMusic);
+function toggleMusic() {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
     } else {
-        console.error('Music player element not found');
+        backgroundMusic.play().catch(error => {
+            console.error('Error playing music:', error);
+        });
     }
+    isMusicPlaying = !isMusicPlaying;
+}
 
+const musicPlayer = document.getElementById('music-player');
+if (musicPlayer) {
+    musicPlayer.addEventListener('click', toggleMusic);
+} else {
+    console.error('Music player element not found');
+}
+
+function setupEventListeners() {
     if (document.getElementById('prediction-form')) {
         document.getElementById('prediction-form').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -81,7 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
+}
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+            setupEventListeners();
+        }
+    });
 });
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+});
+
+setupEventListeners();
 
 function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
