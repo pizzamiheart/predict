@@ -28,15 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     backgroundMusic.pause();
                     isMusicPlaying = false;
                     playPromise = null;
+                    console.log("Music paused");
                 }).catch(error => {
                     console.error('Error pausing music:', error);
                 });
             } else {
                 backgroundMusic.pause();
                 isMusicPlaying = false;
+                console.log("Music paused immediately");
             }
         } else {
-            console.log("Playing music");
+            console.log("Playing music", backgroundMusic.src);
             playPromise = backgroundMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
@@ -45,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).catch(error => {
                     console.error('Error playing music:', error);
                 });
+            } else {
+                console.error('playPromise is undefined');
             }
         }
     }
