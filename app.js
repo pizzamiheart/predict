@@ -16,19 +16,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const successSound = document.getElementById('success-sound');
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
+    let playPromise = null;
 
     function toggleMusic() {
         console.log("Boombox clicked");
+
         if (isMusicPlaying) {
             console.log("Pausing music");
-            backgroundMusic.pause();
-            isMusicPlaying = false;
+            if (playPromise !== null) {
+                playPromise.then(() => {
+                    backgroundMusic.pause();
+                    isMusicPlaying = false;
+                    playPromise = null;
+                }).catch(error => {
+                    console.error('Error pausing music:', error);
+                });
+            } else {
+                backgroundMusic.pause();
+                isMusicPlaying = false;
+            }
         } else {
             console.log("Playing music");
-            backgroundMusic.play().catch(error => {
-                console.error('Error playing music:', error);
-            });
-            isMusicPlaying = true;
+            playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Music is playing");
+                    isMusicPlaying = true;
+                }).catch(error => {
+                    console.error('Error playing music:', error);
+                });
+            }
         }
     }
 
