@@ -12,31 +12,36 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-const successSound = document.getElementById('success-sound');
-const backgroundMusic = document.getElementById('background-music');
-let isMusicPlaying = false;
+document.addEventListener('DOMContentLoaded', () => {
+    const successSound = document.getElementById('success-sound');
+    const backgroundMusic = document.getElementById('background-music');
+    let isMusicPlaying = false;
 
-function toggleMusic() {
-    if (isMusicPlaying) {
-        backgroundMusic.pause();
-    } else {
-        backgroundMusic.play().catch(error => {
-            console.error('Error playing music:', error);
-        });
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            backgroundMusic.pause();
+        } else {
+            backgroundMusic.play().catch(error => {
+                console.error('Error playing music:', error);
+            });
+        }
+        isMusicPlaying = !isMusicPlaying;
     }
-    isMusicPlaying = !isMusicPlaying;
-}
 
-const musicPlayer = document.getElementById('music-player');
-if (musicPlayer) {
-    musicPlayer.addEventListener('click', toggleMusic);
-} else {
-    console.error('Music player element not found');
-}
+    const musicPlayer = document.getElementById('music-player');
+    if (musicPlayer) {
+        musicPlayer.addEventListener('click', toggleMusic);
+    } else {
+        console.error('Music player element not found');
+    }
+
+    setupEventListeners();
+});
 
 function setupEventListeners() {
-    if (document.getElementById('prediction-form')) {
-        document.getElementById('prediction-form').addEventListener('submit', async (event) => {
+    const predictionForm = document.getElementById('prediction-form');
+    if (predictionForm) {
+        predictionForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const predictionText = document.getElementById('prediction').value;
             const userName = document.getElementById('name').value || "Anonymous";
@@ -49,6 +54,7 @@ function setupEventListeners() {
                     prediction: predictionText,
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
+                const successSound = document.getElementById('success-sound');
                 successSound.play();
                 showModal(); // Show modal instead of alert
                 event.target.reset();
@@ -59,20 +65,23 @@ function setupEventListeners() {
         });
     }
 
-    if (document.getElementById('view-all-btn')) {
-        document.getElementById('view-all-btn').addEventListener('click', () => {
+    const viewAllBtn = document.getElementById('view-all-btn');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
             window.location.href = 'predictions.html';
         });
     }
 
-    if (document.getElementById('back-btn')) {
-        document.getElementById('back-btn').addEventListener('click', () => {
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
             window.location.href = 'index.html';
         });
     }
 
-    if (document.getElementById('view-all-btn-modal')) {
-        document.getElementById('view-all-btn-modal').addEventListener('click', () => {
+    const viewAllBtnModal = document.getElementById('view-all-btn-modal');
+    if (viewAllBtnModal) {
+        viewAllBtnModal.addEventListener('click', () => {
             hideModal();
             window.location.href = 'predictions.html';
         });
@@ -83,6 +92,7 @@ function setupEventListeners() {
     }
 }
 
+// Use MutationObserver to handle dynamic changes in the DOM
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.type === 'childList') {
@@ -91,12 +101,11 @@ const observer = new MutationObserver((mutations) => {
     });
 });
 
+// Start observing the target node for configured mutations
 observer.observe(document.body, {
     childList: true,
     subtree: true,
 });
-
-setupEventListeners();
 
 function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
