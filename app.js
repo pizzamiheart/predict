@@ -16,35 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const successSound = document.getElementById('success-sound');
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
-    let isPlayingPromise = null;
 
     function toggleMusic() {
+        console.log("Boombox clicked");
         if (isMusicPlaying) {
-            if (isPlayingPromise !== null) {
-                isPlayingPromise.then(() => {
-                    backgroundMusic.pause();
-                    isMusicPlaying = false;
-                    isPlayingPromise = null;
-                }).catch(error => {
-                    console.error('Error pausing music:', error);
-                });
-            } else {
-                backgroundMusic.pause();
-                isMusicPlaying = false;
-            }
+            console.log("Pausing music");
+            backgroundMusic.pause();
+            isMusicPlaying = false;
         } else {
-            isPlayingPromise = backgroundMusic.play().catch(error => {
+            console.log("Playing music");
+            backgroundMusic.play().catch(error => {
                 console.error('Error playing music:', error);
-                isPlayingPromise = null;
-            }).finally(() => {
-                isMusicPlaying = true;
             });
+            isMusicPlaying = true;
         }
     }
 
     const musicPlayer = document.getElementById('music-player');
+    console.log("Music Player Element:", musicPlayer);
     if (musicPlayer) {
         musicPlayer.addEventListener('click', toggleMusic);
+        console.log("Event listener added to music player");
     } else {
         console.error('Music player element not found');
     }
