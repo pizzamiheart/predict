@@ -244,8 +244,8 @@ footer {
 }
 
 .earth-2 {
-  top: 140px;
-  left: 350px;
+  bottom: 20px;
+  left: 500px;
   width: 100px;
   height: 100px;
   background-image: url('assets/earth.png');
@@ -253,7 +253,7 @@ footer {
 }
 
 .hockey-stick {
-  top: 150px;
+  top: 75px;
   right: 50px;
   width: 150px;
   height: 150px;
@@ -273,8 +273,8 @@ footer {
 .bell-pepper {
   top: 200px;
   right: 60px;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background-image: url('assets/bell-pepper.png');
 }
 
@@ -515,10 +515,10 @@ button#view-all-btn-modal:hover {
 
 @keyframes pulse-border-orange {
   0% {
-    box-shadow: 0 0 15px orange, 0 0 0 10px rgba(255, 165, 0, 0.5);
+    box-shadow: 0 0 7px orange, 0 0 0 4px rgba(255, 165, 0, 0.5);
   }
   100% {
-    box-shadow: 0 0 15px orange, 0 0 0 15px rgba(255, 165, 0, 0);
+    box-shadow: 0 0 7px orange, 0 0 0 4px rgba(255, 165, 0, 0);
   }
 }
 
