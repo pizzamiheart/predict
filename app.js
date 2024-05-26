@@ -106,9 +106,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (window.location.pathname.includes('predictions.html')) {
-        loadPredictions();
+        setupInfiniteScroll(); // Added call to setupInfiniteScroll
     }
 });
+
+// Added function for infinite scroll
+function setupInfiniteScroll() {
+    let page = 1;
+    const limit = 10;
+    let loading = false;
+    const predictionsContainer = document.querySelector('.predictions-container');
+
+    const loadPredictions = async () => {
+        if (loading) return;
+        loading = true;
+
+        try {
+            const querySnapshot = await db.collection('predictions')
+                .orderBy('time_stamp', 'desc')
+                .limit(limit)
+                .startAfter((page - 1) * limit)
+                .get();
+            
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                const predictionElement = document.createElement('div');
+                predictionElement.className = 'prediction';
+                predictionElement.innerHTML = `
+                    <div class="prediction-header">
+                        <span class="prediction-name">${data.name}, ${data.location}</span>
+                        <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
+                    </div>
+                    <div class="prediction-body">${data.prediction}</div>
+                `;
+                predictionsContainer.appendChild(predictionElement);
+            });
+
+            if (querySnapshot.size < limit) {
+                window.removeEventListener('scroll', handleScroll);
+            } else {
+                page++;
+            }
+        } catch (error) {
+            console.error('Error loading predictions:', error);
+        }
+
+        loading = false;
+    };
+
+    const handleScroll = () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !loading) {
+            loadPredictions();
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    loadPredictions(); // Initial load
+}
 
 function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
