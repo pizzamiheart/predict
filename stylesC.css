@@ -118,8 +118,7 @@ footer p {
   align-items: center;
   margin: 20px auto;
   width: 80%; /* Center container */
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: calc(100vh - 200px); /* Adjust height to ensure footer is visible */
+  overflow-y: auto; /* Allow scrolling in the predictions container */
 }
 
 .prediction {
@@ -132,6 +131,7 @@ footer p {
   position: relative;
   overflow: hidden;
   border: 2px solid #ff00ff;
+  word-wrap: break-word; /* Ensure text wraps within the prediction box */
 }
 
 @keyframes moveBorder {
@@ -221,6 +221,7 @@ body {
 
 main {
   flex: 1;
+  overflow-y: auto; /* Allow scrolling in main content */
 }
 
 footer {
@@ -455,21 +456,21 @@ footer {
   margin: 15% auto;
   padding: 20px;
   border: 2px solid #ff0;
-  width: 50%; /* Adjusted width */
-  max-width: 600px; /* Max width to avoid too wide modal on large screens */
+  width: 50%; /* Adjusted the width to make the modal smaller */
   border-radius: 10px;
   text-align: center;
-  position: relative; /* For the close button positioning */
+  position: relative; /* Ensure the close button is positioned relative to the modal */
 }
 
+/* Close Button */
 .close-modal {
   position: absolute;
   top: 10px;
-  right: 20px;
-  background: none;
+  right: 10px;
+  background: transparent;
   border: none;
+  font-size: 1.5rem;
   color: #ff0;
-  font-size: 24px;
   cursor: pointer;
 }
 
