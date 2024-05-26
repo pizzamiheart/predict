@@ -110,28 +110,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function loadPredictions() {
+let lastVisible = null;
+
+async function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
     if (predictionsList) {
-        db.collection('predictions').orderBy('time_stamp', 'desc').get().then(querySnapshot => {
-            predictionsList.innerHTML = '';
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                predictionsList.innerHTML += `
-                    <div class="prediction">
-                        <div class="prediction-header">
-                            <span class="prediction-name">${data.name}, ${data.location}</span>
-                            <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
-                        </div>
-                        <div class="prediction-body">${data.prediction}</div>
+        let query = db.collection('predictions').orderBy('time_stamp', 'desc').limit(10);
+
+        if (lastVisible) {
+            query = query.startAfter(lastVisible);
+        }
+
+        const querySnapshot = await query.get();
+        lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            predictionsList.innerHTML += `
+                <div class="prediction">
+                    <div class="prediction-header">
+                        <span class="prediction-name">${data.name}, ${data.location}</span>
+                        <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
                     </div>
-                `;
-            });
-        }).catch(error => {
-            console.error('Error loading predictions:', error);
+                    <div class="prediction-body">${data.prediction}</div>
+                </div>
+            `;
         });
+
+        if (!querySnapshot.empty) {
+            observer.observe(document.querySelector('.prediction:last-child'));
+        }
     }
 }
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            loadPredictions();
+        }
+    });
+}, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0
+});
 
 // Show Modal Function
 function showModal() {
@@ -148,11 +171,3 @@ function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
 }
-
-// Add the close button functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const closeModalButton = document.querySelector('.close-modal');
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', hideModal);
-    }
-});
