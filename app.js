@@ -148,3 +148,11 @@ function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
 }
+
+// Add the close button functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const closeModalButton = document.querySelector('.close-modal');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', hideModal);
+    }
+});
