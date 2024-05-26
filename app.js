@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
     let playPromise = null;
+    let isSubmitting = false; // Add this flag
 
     function toggleMusic() {
         console.log("Boombox clicked");
@@ -70,6 +71,9 @@ function setupEventListeners() {
     if (predictionForm) {
         predictionForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            if (isSubmitting) return; // Prevent multiple submissions
+            isSubmitting = true; // Set the flag to true
+
             const predictionText = document.getElementById('prediction').value;
             const userName = document.getElementById('name').value || "Anonymous";
             const userLocation = document.getElementById('location').value || "Unknown";
@@ -87,6 +91,8 @@ function setupEventListeners() {
             } catch (error) {
                 console.error('Error submitting prediction:', error);
                 alert('Failed to submit prediction: ' + error.message);
+            } finally {
+                isSubmitting = false; // Reset the flag
             }
         });
     }
