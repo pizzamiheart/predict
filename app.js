@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
     let playPromise = null;
-    let isSubmitting = false; // Add this flag
 
     function toggleMusic() {
         console.log("Boombox clicked");
@@ -63,17 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Music player element not found');
     }
 
-    setupEventListeners();
-});
-
-function setupEventListeners() {
-    const predictionForm = document.getElementById('prediction-form');
-    if (predictionForm) {
-        predictionForm.addEventListener('submit', async (event) => {
+    if (document.getElementById('prediction-form')) {
+        document.getElementById('prediction-form').addEventListener('submit', async (event) => {
             event.preventDefault();
-            if (isSubmitting) return; // Prevent multiple submissions
-            isSubmitting = true; // Set the flag to true
-
             const predictionText = document.getElementById('prediction').value;
             const userName = document.getElementById('name').value || "Anonymous";
             const userLocation = document.getElementById('location').value || "Unknown";
@@ -85,35 +76,30 @@ function setupEventListeners() {
                     prediction: predictionText,
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                playSuccessSound();
+                successSound.play();
                 showModal(); // Show modal instead of alert
                 event.target.reset();
             } catch (error) {
                 console.error('Error submitting prediction:', error);
                 alert('Failed to submit prediction: ' + error.message);
-            } finally {
-                isSubmitting = false; // Reset the flag
             }
         });
     }
 
-    const viewAllBtn = document.getElementById('view-all-btn');
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', () => {
+    if (document.getElementById('view-all-btn')) {
+        document.getElementById('view-all-btn').addEventListener('click', () => {
             window.location.href = 'predictions.html';
         });
     }
 
-    const backBtn = document.getElementById('back-btn');
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
+    if (document.getElementById('back-btn')) {
+        document.getElementById('back-btn').addEventListener('click', () => {
             window.location.href = 'index.html';
         });
     }
 
-    const viewAllBtnModal = document.getElementById('view-all-btn-modal');
-    if (viewAllBtnModal) {
-        viewAllBtnModal.addEventListener('click', () => {
+    if (document.getElementById('view-all-btn-modal')) {
+        document.getElementById('view-all-btn-modal').addEventListener('click', () => {
             hideModal();
             window.location.href = 'predictions.html';
         });
@@ -122,33 +108,7 @@ function setupEventListeners() {
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
-}
-
-// Use MutationObserver to handle dynamic changes in the DOM
-const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if (mutation.type === 'childList') {
-            setupEventListeners();
-        }
-    });
 });
-
-// Start observing the target node for configured mutations
-observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-});
-
-setupEventListeners();
-
-function playSuccessSound() {
-    const successSound = document.getElementById('success-sound');
-    if (successSound) {
-        successSound.play().catch(error => {
-            console.error('Error playing success sound:', error);
-        });
-    }
-}
 
 function loadPredictions() {
     const predictionsList = document.getElementById('predictions-list');
@@ -179,7 +139,8 @@ function showModal() {
     modal.style.display = 'block';
 
     // Play sound
-    playSuccessSound();
+    const audio = new Audio('assets/success-sound.mp3');
+    audio.play();
 }
 
 // Hide Modal Function
