@@ -117,26 +117,26 @@ footer p {
   flex-direction: column;
   align-items: center;
   margin: 20px auto;
-  width: 70%; /* Changed from 90% to 70% */
-  max-width: 1000px; /* Add this line to limit maximum width */
-  max-height: 70vh; /* Reduced from 80vh to leave space for header and footer */
-  overflow-y: auto; /* Enable vertical scrolling */
+  width: 70%;
+  max-width: 1000px;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .prediction {
   background-color: #333333;
   border-radius: 10px;
   margin: 10px;
-  padding: 20px; /* Increased padding for better spacing */
-  width: 100%; /* Ensure predictions take full width of the container */
+  padding: 20px;
+  width: 100%;
   box-shadow: 5px 5px 15px #000000;
   position: relative;
-  overflow: visible; /* Changed from hidden to visible */
+  overflow: visible;
   border: 2px solid #ff00ff;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  word-wrap: break-word; /* Ensure long words break and fit within the container */
-  margin-bottom: 20px; /* Added margin between predictions */
-  max-height: none; /* Remove any max-height restriction */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  max-height: none;
 }
 
 @keyframes moveBorder {
@@ -179,10 +179,10 @@ footer p {
 }
 
 .prediction-body {
-  font-size: 1em; /* Reduced from 1.2em to fit more text */
+  font-size: 1em;
   color: #e1e1e1;
-  white-space: normal; /* Ensure text wraps */
-  overflow-wrap: break-word; /* Break long words if necessary */
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 /* Success Message Styles */
@@ -211,8 +211,8 @@ footer p {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 20px auto; /* Center the button */
-  display: block; /* Ensure it takes full width for centering */
+  margin: 20px auto;
+  display: block;
 }
 
 #back-btn:hover {
@@ -229,7 +229,7 @@ body {
 
 main {
   flex: 1;
-  overflow-y: auto; /* Allow scrolling in main content */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,9 +243,11 @@ footer {
 /* Background Images */
 .background-image {
   position: absolute;
-  z-index: -1; /* Ensure the images are behind other content */
+  max-width: 100px;  /* Adjust as needed */
+  max-height: 100px; /* Adjust as needed */
+  z-index: -1;
   background-size: cover;
-  background-repeat: no-repeat; /* Ensure the background doesn't repeat */
+  background-repeat: no-repeat;
 }
 
 /* Position and Size of Images */
@@ -425,6 +427,59 @@ footer {
   input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
     width: 90%;
   }
+
+  input[type="text"], textarea {
+    font-size: 16px;
+  }
+  
+  input[type="submit"], button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .background-image {
+    transform: scale(0.7);
+  }
+
+  .earth-1, .earth-2 {
+    width: 70px;
+    height: 70px;
+  }
+
+  .hockey-stick {
+    width: 105px;
+    height: 105px;
+  }
+
+  .basketball, .bell-pepper, .ipod, .jeans, .lion {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cowboy, .internet-1, .internet-2 {
+    width: 70px;
+    height: 70px;
+  }
+
+  .drake {
+    width: 165px;
+    height: 165px;
+  }
+
+  .flip-phone {
+    width: 70px;
+    height: 70px;
+  }
+
+  .music-player {
+    width: 50px;
+    height: 50px;
+  }
+
+  .music-player img {
+    width: 35px;
+    height: 35px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -444,7 +499,47 @@ footer {
     width: 95%;
   }
   .background-image {
-    display: none; /* Hide background images on very small screens */
+    transform: scale(0.5);
+  }
+
+  .earth-1, .earth-2 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hockey-stick {
+    width: 75px;
+    height: 75px;
+  }
+
+  .basketball, .bell-pepper, .ipod, .jeans, .lion {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cowboy, .internet-1, .internet-2 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .drake {
+    width: 120px;
+    height: 120px;
+  }
+
+  .flip-phone {
+    width: 50px;
+    height: 50px;
+  }
+
+  .music-player {
+    width: 40px;
+    height: 40px;
+  }
+
+  .music-player img {
+    width: 25px;
+    height: 25px;
   }
 }
 
@@ -468,10 +563,10 @@ footer {
   margin: 15% auto;
   padding: 20px;
   border: 2px solid #ff0;
-  width: 50%; /* Adjusted the width to make the modal smaller */
+  width: 50%;
   border-radius: 10px;
   text-align: center;
-  position: relative; /* Ensure the close button is positioned relative to the modal */
+  position: relative;
 }
 
 /* Close Button */
@@ -523,7 +618,7 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Add these styles for the music player button */
+/* Music player styles */
 .music-player {
   position: absolute;
   bottom: 20px;
@@ -566,3 +661,4 @@ button#view-all-btn-modal:hover {
 .music-player img {
   width: 50px;
   height: 50px;
+}
