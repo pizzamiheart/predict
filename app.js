@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 const placeholders = [
     "By 2031, cows will make their own butter...",
-    "We will soon learn that the dresh was, in fact, blue...",
+    "We will soon learn that the dress was, in fact, blue...",
     "By 2027, we will be able to communicate with whales...",
     "In 2035, we'll have cities on Mars..."
 ];
@@ -223,6 +223,7 @@ function tweetPrediction(button) {
 document.addEventListener('DOMContentLoaded', () => {
     const backgroundImages = document.querySelectorAll('.background-image');
     backgroundImages.forEach(img => {
+        img.style.cursor = 'pointer'; // Make the image appear clickable
         img.addEventListener('click', () => {
             const facts = {
                 'earth': "New York City only exists on the planet Earth.",
@@ -270,3 +271,22 @@ async function votePrediction(button, voteValue) {
         console.error('Error updating vote:', error);
     }
 }
+
+// Add this function to your app.js
+function tweetPrediction() {
+    const predictionText = document.getElementById('prediction').value;
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(predictionText)}&url=${encodeURIComponent(window.location.href)}`;
+    window.open(tweetUrl, '_blank');
+}
+
+// Add this to your existing DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+
+    const tweetPredictionBtn = document.getElementById('tweet-prediction-btn');
+    if (tweetPredictionBtn) {
+        tweetPredictionBtn.addEventListener('click', tweetPrediction);
+    }
+
+    // ... rest of your existing code ...
+});
