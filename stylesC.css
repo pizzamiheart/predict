@@ -12,23 +12,6 @@ header h1 {
   margin-top: 20px;
   color: #FFEB3B;
   text-shadow: 2px 2px #ff00ff;
-  overflow: hidden;
-  border-right: 0.15em solid #FFEB3B;
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: 0.15em;
-  animation: 
-    typewriter 4s steps(40, end) infinite alternate,
-    blink 0.75s step-end infinite;
-}
-
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
 }
 
 header h2 {
@@ -134,7 +117,8 @@ footer p {
   flex-direction: column;
   align-items: center;
   margin: 20px auto;
-  width: 70%; /* Increased from 80% to give more space */
+  width: 70%; /* Changed from 90% to 70% */
+  max-width: 1000px; /* Add this line to limit maximum width */
   max-height: 70vh; /* Reduced from 80vh to leave space for header and footer */
   overflow-y: auto; /* Enable vertical scrolling */
 }
@@ -144,7 +128,7 @@ footer p {
   border-radius: 10px;
   margin: 10px;
   padding: 20px; /* Increased padding for better spacing */
-  width: 100%; /* Make sure it fits within the container */
+  width: 100%; /* Ensure predictions take full width of the container */
   box-shadow: 5px 5px 15px #000000;
   position: relative;
   overflow: visible; /* Changed from hidden to visible */
@@ -195,7 +179,7 @@ footer p {
 }
 
 .prediction-body {
-  font-size: 1.2em; /* Reduced from 1.2em to fit more text */
+  font-size: 1em; /* Reduced from 1.2em to fit more text */
   color: #e1e1e1;
   white-space: normal; /* Ensure text wraps */
   overflow-wrap: break-word; /* Break long words if necessary */
@@ -227,7 +211,8 @@ footer p {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 20px;
+  margin: 20px auto; /* Center the button */
+  display: block; /* Ensure it takes full width for centering */
 }
 
 #back-btn:hover {
@@ -245,6 +230,10 @@ body {
 main {
   flex: 1;
   overflow-y: auto; /* Allow scrolling in main content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 footer {
@@ -577,18 +566,3 @@ button#view-all-btn-modal:hover {
 .music-player img {
   width: 50px;
   height: 50px;
-}
-
-#tweet-prediction-btn {
-    background-color: #1DA1F2; /* Twitter blue */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#tweet-prediction-btn:hover {
-    background-color: #0c85d0;
-}
