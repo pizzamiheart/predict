@@ -132,13 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tooltip = document.createElement('span');
             tooltip.classList.add('tooltiptext');
             tooltip.textContent = facts[imgName];
-            
-            // If it's the flip-phone, wrap it in its parent (the anchor tag)
-            if (imgName === 'flip-phone') {
-                img.parentElement.appendChild(tooltip);
-            } else {
-                img.appendChild(tooltip);
-            }
+            img.appendChild(tooltip);
         }
     });
 
