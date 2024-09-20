@@ -133,12 +133,6 @@ async function loadPredictions() {
                         <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
                     </div>
                     <div class="prediction-body">${data.prediction}</div>
-                    <button class="tweet-btn" onclick="tweetPrediction(this)">Tweet this prediction</button>
-                    <div class="prediction-actions">
-                        <button class="vote-btn upvote" onclick="votePrediction(this, 1)">👍 <span class="vote-count">${data.upvotes || 0}</span></button>
-                        <button class="vote-btn downvote" onclick="votePrediction(this, -1)">👎 <span class="vote-count">${data.downvotes || 0}</span></button>
-                        <button class="tweet-btn" onclick="tweetPrediction(this)">Tweet this prediction</button>
-                    </div>
                 </div>
             `;
         });
@@ -193,7 +187,9 @@ function typeWriter(element, text, speed = 50) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const title = document.querySelector('header h1');
-    typeWriter(title, "What will happen in the future?");
+    if (title) {
+        typeWriter(title, "What will happen in the future?");
+    }
 });
 
 const placeholders = [
@@ -214,12 +210,6 @@ function rotatePlaceholder() {
 
 document.addEventListener('DOMContentLoaded', rotatePlaceholder);
 
-function tweetPrediction(button) {
-    const predictionText = button.closest('.prediction').querySelector('.prediction-body').textContent;
-    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(predictionText)}&url=${encodeURIComponent(window.location.href)}`;
-    window.open(tweetUrl, '_blank');
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     const backgroundImages = document.querySelectorAll('.background-image');
     backgroundImages.forEach(img => {
@@ -237,56 +227,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
-
-async function votePrediction(button, voteValue) {
-    const predictionElement = button.closest('.prediction');
-    const predictionId = predictionElement.dataset.id;
-    const voteType = voteValue === 1 ? 'upvotes' : 'downvotes';
-    const oppositeVoteType = voteValue === 1 ? 'downvotes' : 'upvotes';
-
-    try {
-        const docRef = db.collection('predictions').doc(predictionId);
-        const doc = await docRef.get();
-
-        if (doc.exists) {
-            const currentVotes = doc.data()[voteType] || 0;
-            const oppositeVotes = doc.data()[oppositeVoteType] || 0;
-
-            await docRef.update({
-                [voteType]: currentVotes + 1,
-                [oppositeVoteType]: Math.max(0, oppositeVotes - 1) // Ensure we don't go below 0
-            });
-
-            // Update UI
-            const voteCountElement = button.querySelector('.vote-count');
-            voteCountElement.textContent = currentVotes + 1;
-
-            // Update opposite vote count in UI
-            const oppositeButton = button.parentElement.querySelector(voteValue === 1 ? '.downvote' : '.upvote');
-            const oppositeVoteCountElement = oppositeButton.querySelector('.vote-count');
-            oppositeVoteCountElement.textContent = Math.max(0, oppositeVotes - 1);
-        }
-    } catch (error) {
-        console.error('Error updating vote:', error);
-    }
-}
-
-// Add this function to your app.js
-function tweetPrediction() {
-    const predictionText = document.getElementById('prediction').value;
-    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(predictionText)}&url=${encodeURIComponent(window.location.href)}`;
-    window.open(tweetUrl, '_blank');
-}
-
-// Add this to your existing DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
-
-    const tweetPredictionBtn = document.getElementById('tweet-prediction-btn');
-    if (tweetPredictionBtn) {
-        tweetPredictionBtn.addEventListener('click', tweetPrediction);
-    }
-
-    // ... rest of your existing code ...
 });
