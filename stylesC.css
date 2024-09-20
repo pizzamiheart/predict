@@ -117,26 +117,26 @@ footer p {
   flex-direction: column;
   align-items: center;
   margin: 20px auto;
-  width: 70%;
-  max-width: 1000px;
-  max-height: 70vh;
-  overflow-y: auto;
+  width: 70%; /* Changed from 90% to 70% */
+  max-width: 1000px; /* Add this line to limit maximum width */
+  max-height: 70vh; /* Reduced from 80vh to leave space for header and footer */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .prediction {
   background-color: #333333;
   border-radius: 10px;
   margin: 10px;
-  padding: 20px;
-  width: 100%;
+  padding: 20px; /* Increased padding for better spacing */
+  width: 100%; /* Ensure predictions take full width of the container */
   box-shadow: 5px 5px 15px #000000;
   position: relative;
-  overflow: visible;
+  overflow: visible; /* Changed from hidden to visible */
   border: 2px solid #ff00ff;
-  box-sizing: border-box;
-  word-wrap: break-word;
-  margin-bottom: 20px;
-  max-height: none;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  word-wrap: break-word; /* Ensure long words break and fit within the container */
+  margin-bottom: 20px; /* Added margin between predictions */
+  max-height: none; /* Remove any max-height restriction */
 }
 
 @keyframes moveBorder {
@@ -179,10 +179,10 @@ footer p {
 }
 
 .prediction-body {
-  font-size: 1em;
+  font-size: 1em; /* Reduced from 1.2em to fit more text */
   color: #e1e1e1;
-  white-space: normal;
-  overflow-wrap: break-word;
+  white-space: normal; /* Ensure text wraps */
+  overflow-wrap: break-word; /* Break long words if necessary */
 }
 
 /* Success Message Styles */
@@ -211,8 +211,8 @@ footer p {
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 20px auto;
-  display: block;
+  margin: 20px auto; /* Center the button */
+  display: block; /* Ensure it takes full width for centering */
 }
 
 #back-btn:hover {
@@ -229,7 +229,7 @@ body {
 
 main {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto; /* Allow scrolling in main content */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,17 +243,15 @@ footer {
 /* Background Images */
 .background-image {
   position: absolute;
-  max-width: 100px;  /* Adjust as needed */
-  max-height: 100px; /* Adjust as needed */
-  z-index: -1;
+  z-index: -1; /* Ensure the images are behind other content */
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; /* Ensure the background doesn't repeat */
 }
 
 /* Position and Size of Images */
 .earth-1 {
-  top: 10%;
-  left: 10%;
+  top: 50px;
+  left: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/earth.png');
@@ -261,8 +259,8 @@ footer {
 }
 
 .earth-2 {
-  bottom: 10%;
-  right: 10%;
+  bottom: 20px;
+  left: 500px;
   width: 100px;
   height: 100px;
   background-image: url('assets/earth.png');
@@ -270,8 +268,8 @@ footer {
 }
 
 .hockey-stick {
-  top: 15%;
-  right: 15%;
+  top: 75px;
+  right: 50px;
   width: 150px;
   height: 150px;
   background-image: url('assets/hockey.png');
@@ -279,8 +277,8 @@ footer {
 }
 
 .basketball {
-  bottom: 20%;
-  left: 20%;
+  bottom: 60px;
+  left: 200px;
   width: 50px;
   height: 50px;
   background-image: url('assets/bball.png');
@@ -288,16 +286,16 @@ footer {
 }
 
 .bell-pepper {
-  top: 30%;
-  right: 25%;
+  top: 200px;
+  right: 60px;
   width: 60px;
   height: 60px;
   background-image: url('assets/bell-pepper.png');
 }
 
 .cowboy {
-  bottom: 25%;
-  left: 15%;
+  bottom: 400px;
+  left: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/cowboy.png');
@@ -305,16 +303,16 @@ footer {
 }
 
 .drake {
-  bottom: 15%;
-  left: 5%;
+  bottom: 50px;
+  left: 15px;
   width: 235px;
   height: 235px;
   background-image: url('assets/drake.png');
 }
 
 .flip-phone {
-  bottom: 20%;
-  right: 25%;
+  bottom: 65px;
+  right: 150px;
   width: 100px;
   height: 100px;
   background-image: url('assets/flip-phone.png');
@@ -322,8 +320,8 @@ footer {
 }
 
 .internet-1 {
-  top: 40%;
-  right: 20%;
+  top: 375px;
+  right: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
@@ -331,8 +329,8 @@ footer {
 }
 
 .internet-2 {
-  bottom: 35%;
-  left: 25%;
+  bottom: 400px;
+  left: 500px;
   width: 100px;
   height: 100px;
   background-image: url('assets/internet.png');
@@ -340,24 +338,24 @@ footer {
 }
 
 .ipod {
-  top: 45%;
-  left: 15%;
+  top: 400px;
+  left: 100px;
   width: 100px;
   height: 100px;
   background-image: url('assets/ipod.png');
 }
 
 .jeans {
-  top: 55%;
-  right: 10%;
+  top: 500px;
+  right: 50px;
   width: 100px;
   height: 100px;
   background-image: url('assets/jeans.png');
 }
 
 .lion {
-  bottom: 40%;
-  left: 10%;
+  bottom: 280px;
+  left: 50px;
   width: 100px;
   height: 100px;
   background-image: url('assets/lion.png');
@@ -470,10 +468,10 @@ footer {
   margin: 15% auto;
   padding: 20px;
   border: 2px solid #ff0;
-  width: 50%;
+  width: 50%; /* Adjusted the width to make the modal smaller */
   border-radius: 10px;
   text-align: center;
-  position: relative;
+  position: relative; /* Ensure the close button is positioned relative to the modal */
 }
 
 /* Close Button */
@@ -525,7 +523,7 @@ button#view-all-btn-modal:hover {
   color: #fff;
 }
 
-/* Music player styles */
+/* Add these styles for the music player button */
 .music-player {
   position: absolute;
   bottom: 20px;
@@ -565,48 +563,6 @@ button#view-all-btn-modal:hover {
   100% { transform: rotate(0); }
 }
 
-/* Tooltip styles */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-
-.background-image {
-  cursor: pointer;
-}
-
-.flip-phone-link {
-  position: relative;
-  display: inline-block;
-}
-
-.flip-phone-link .tooltiptext {
-  bottom: 100%;
-}
-
 .music-player img {
   width: 50px;
   height: 50px;
-}
