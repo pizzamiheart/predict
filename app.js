@@ -127,12 +127,18 @@ async function loadPredictions() {
         querySnapshot.forEach(doc => {
             const data = doc.data();
             predictionsList.innerHTML += `
-                <div class="prediction">
+                <div class="prediction" data-id="${doc.id}">
                     <div class="prediction-header">
                         <span class="prediction-name">${data.name}, ${data.location}</span>
                         <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
                     </div>
                     <div class="prediction-body">${data.prediction}</div>
+                    <button class="tweet-btn" onclick="tweetPrediction(this)">Tweet this prediction</button>
+                    <div class="prediction-actions">
+                        <button class="vote-btn upvote" onclick="votePrediction(this, 1)">👍 <span class="vote-count">${data.upvotes || 0}</span></button>
+                        <button class="vote-btn downvote" onclick="votePrediction(this, -1)">👎 <span class="vote-count">${data.downvotes || 0}</span></button>
+                        <button class="tweet-btn" onclick="tweetPrediction(this)">Tweet this prediction</button>
+                    </div>
                 </div>
             `;
         });
@@ -170,4 +176,97 @@ function showModal() {
 function hideModal() {
     const modal = document.getElementById('success-modal');
     modal.style.display = 'none';
+}
+
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    element.innerHTML = '';
+    type();
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const title = document.querySelector('header h1');
+    typeWriter(title, "What will happen in the future?");
+});
+
+const placeholders = [
+    "By 2031, cows will make their own butter...",
+    "We will soon learn that the dresh was, in fact, blue...",
+    "By 2027, we will be able to communicate with whales...",
+    "In 2035, we'll have cities on Mars..."
+];
+
+function rotatePlaceholder() {
+    const predictionInput = document.getElementById('prediction');
+    let currentIndex = 0;
+    setInterval(() => {
+        predictionInput.placeholder = placeholders[currentIndex];
+        currentIndex = (currentIndex + 1) % placeholders.length;
+    }, 5000); // Change every 5 seconds
+}
+
+document.addEventListener('DOMContentLoaded', rotatePlaceholder);
+
+function tweetPrediction(button) {
+    const predictionText = button.closest('.prediction').querySelector('.prediction-body').textContent;
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(predictionText)}&url=${encodeURIComponent(window.location.href)}`;
+    window.open(tweetUrl, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backgroundImages = document.querySelectorAll('.background-image');
+    backgroundImages.forEach(img => {
+        img.addEventListener('click', () => {
+            const facts = {
+                'earth': "New York City only exists on the planet Earth.",
+                'hockey-stick': "The first organized indoor hockey game was played in Montreal in 1875. Also, hockey stick is a term used by tech bros to describe failure at the beginning and luck down the road.",
+                'basketball': "Basketball was invented by James Naismith in 1891.",
+                // Add more facts for other images
+            };
+            const imgName = img.alt.replace(' ', '-');
+            if (facts[imgName]) {
+                alert(facts[imgName]);
+            }
+        });
+    });
+});
+
+async function votePrediction(button, voteValue) {
+    const predictionElement = button.closest('.prediction');
+    const predictionId = predictionElement.dataset.id;
+    const voteType = voteValue === 1 ? 'upvotes' : 'downvotes';
+    const oppositeVoteType = voteValue === 1 ? 'downvotes' : 'upvotes';
+
+    try {
+        const docRef = db.collection('predictions').doc(predictionId);
+        const doc = await docRef.get();
+
+        if (doc.exists) {
+            const currentVotes = doc.data()[voteType] || 0;
+            const oppositeVotes = doc.data()[oppositeVoteType] || 0;
+
+            await docRef.update({
+                [voteType]: currentVotes + 1,
+                [oppositeVoteType]: Math.max(0, oppositeVotes - 1) // Ensure we don't go below 0
+            });
+
+            // Update UI
+            const voteCountElement = button.querySelector('.vote-count');
+            voteCountElement.textContent = currentVotes + 1;
+
+            // Update opposite vote count in UI
+            const oppositeButton = button.parentElement.querySelector(voteValue === 1 ? '.downvote' : '.upvote');
+            const oppositeVoteCountElement = oppositeButton.querySelector('.vote-count');
+            oppositeVoteCountElement.textContent = Math.max(0, oppositeVotes - 1);
+        }
+    } catch (error) {
+        console.error('Error updating vote:', error);
+    }
 }
