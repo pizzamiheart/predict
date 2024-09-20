@@ -6,11 +6,38 @@
     <link rel="stylesheet" href="stylesC.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .predictions-container {
+            padding-bottom: 20px;
+        }
+        .nav-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>All Predictions</h1>
         <h2>for a great future, again</h2>
+        <a href="index.html" class="nav-button">Make another prediction, partner</a>
     </header>
     <main>
         <div class="predictions-container" id="predictions-list">
