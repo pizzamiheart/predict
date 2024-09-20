@@ -108,6 +108,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('predictions.html')) {
         loadPredictions();
     }
+
+    // Add new tooltip functionality here
+    const backgroundImages = document.querySelectorAll('.background-image');
+    const facts = {
+        'earth': "New York City only exists on the planet Earth.",
+        'hockey-stick': "The first organized indoor hockey game was played in Montreal in 1875. Also, hockey stick is a term used by tech bros to describe failure at the beginning and luck down the road.",
+        'basketball': "Basketball was invented by James Naismith in 1891.",
+        'bell-pepper': "Bell peppers are fruits, not vegetables!",
+        'cowboy': "The term 'cowboy' originated in Ireland.",
+        'drake': "Drake started his career as an actor on Degrassi: The Next Generation.",
+        'flip-phone': "The first flip phone was introduced by Motorola in 1996.",
+        'internet': "The first message sent over the internet was 'LO' - it was supposed to be 'LOGIN' but the system crashed.",
+        'ipod': "The iPod was introduced by Apple in 2001.",
+        'jeans': "The word 'jeans' comes from the French phrase 'bleu de Gênes', meaning 'blue of Genoa'.",
+        'lion': "A group of lions is called a pride."
+    };
+
+    backgroundImages.forEach(img => {
+        const imgName = img.alt.replace(' ', '-').toLowerCase();
+        if (facts[imgName]) {
+            img.classList.add('tooltip');
+            const tooltip = document.createElement('span');
+            tooltip.classList.add('tooltiptext');
+            tooltip.textContent = facts[imgName];
+            
+            // If it's the flip-phone, wrap it in its parent (the anchor tag)
+            if (imgName === 'flip-phone') {
+                img.parentElement.appendChild(tooltip);
+            } else {
+                img.appendChild(tooltip);
+            }
+        }
+    });
+
+    // Prevent the default action for the flip-phone link
+    const flipPhoneLink = document.querySelector('.flip-phone-link');
+    if (flipPhoneLink) {
+        flipPhoneLink.addEventListener('click', (e) => {
+            // If the user clicked on the image itself (not the tooltip), open the link
+            if (e.target.classList.contains('flip-phone')) {
+                window.open(flipPhoneLink.href, '_blank');
+            }
+            e.preventDefault();
+        });
+    }
 });
 
 let lastVisible = null;
@@ -126,10 +171,11 @@ async function loadPredictions() {
 
         querySnapshot.forEach(doc => {
             const data = doc.data();
+            const locationDisplay = data.location && data.location !== "Unknown" ? `, ${data.location}` : '';
             predictionsList.innerHTML += `
                 <div class="prediction" data-id="${doc.id}">
                     <div class="prediction-header">
-                        <span class="prediction-name">${data.name}, ${data.location}</span>
+                        <span class="prediction-name">${data.name}${locationDisplay}</span>
                         <span class="prediction-date">${data.time_stamp ? data.time_stamp.toDate().toLocaleString() : ''}</span>
                     </div>
                     <div class="prediction-body">${data.prediction}</div>
@@ -209,22 +255,3 @@ function rotatePlaceholder() {
 }
 
 document.addEventListener('DOMContentLoaded', rotatePlaceholder);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const backgroundImages = document.querySelectorAll('.background-image');
-    backgroundImages.forEach(img => {
-        img.style.cursor = 'pointer'; // Make the image appear clickable
-        img.addEventListener('click', () => {
-            const facts = {
-                'earth': "New York City only exists on the planet Earth.",
-                'hockey-stick': "The first organized indoor hockey game was played in Montreal in 1875. Also, hockey stick is a term used by tech bros to describe failure at the beginning and luck down the road.",
-                'basketball': "Basketball was invented by James Naismith in 1891.",
-                // Add more facts for other images
-            };
-            const imgName = img.alt.replace(' ', '-');
-            if (facts[imgName]) {
-                alert(facts[imgName]);
-            }
-        });
-    });
-});
