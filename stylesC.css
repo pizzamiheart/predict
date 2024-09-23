@@ -71,7 +71,7 @@ header h6 {
 
 /* Input Fields */
 input[type="text"], #submit-btn, #view-all-btn, #back-home-btn {
-  width: 50%; /* Adjust button width */
+  width: 20%; /* Adjust button width */
   padding: 10px;
   margin: 10px auto;
   display: block;
