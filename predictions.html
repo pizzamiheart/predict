@@ -21,16 +21,21 @@
             padding-bottom: 20px;
         }
         .nav-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
             padding: 10px 15px;
-            background-color: #f0f0f0;
-            border: none;
-            border-radius: 5px;
+            background-color: #FFEB3B;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            color: #333;
+            color: #000;
+            text-shadow: 1px 1px #000;
+            box-shadow: 0 0 5px #00ff00;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        .nav-button:hover {
+            background-color: #ff00ff;
+            color: #fff;
         }
         @media (max-width: 768px) {
             input[type="text"], textarea {
@@ -47,10 +52,9 @@
 <body>
     <header>
         <h1>All Predictions</h1>
-        <h2>for a great future, again</h2>
-        <a href="index.html" class="nav-button">Make another prediction, partner</a>
     </header>
     <main>
+        <a href="index.html" class="nav-button">Make another prediction, partner</a>
         <div class="predictions-container" id="predictions-list">
             <!-- Predictions will be dynamically added here -->
         </div>
