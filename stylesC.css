@@ -251,117 +251,19 @@ footer {
 }
 
 /* Position and Size of Images */
-.earth-1 {
-  top: 50px;
-  left: 100px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/earth.png');
-  animation: spin 20s linear infinite;
-}
-
-.earth-2 {
-  bottom: 20px;
-  left: 500px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/earth.png');
-  animation: spin 20s linear infinite;
-}
-
-.hockey-stick {
-  top: 75px;
-  right: 50px;
-  width: 150px;
-  height: 150px;
-  background-image: url('assets/hockey.png');
-  animation: rock 2s linear infinite alternate;
-}
-
-.basketball {
-  bottom: 60px;
-  left: 200px;
-  width: 50px;
-  height: 50px;
-  background-image: url('assets/bball.png');
-  animation: bounce 2s infinite;
-}
-
-.bell-pepper {
-  top: 200px;
-  right: 60px;
-  width: 60px;
-  height: 60px;
-  background-image: url('assets/bell-pepper.png');
-}
-
-.cowboy {
-  bottom: 400px;
-  left: 100px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/cowboy.png');
-  animation: moveCowboy 4s infinite;
-}
-
-.drake {
-  bottom: 50px;
-  left: 15px;
-  width: 235px;
-  height: 235px;
-  background-image: url('assets/drake.png');
-}
-
-.flip-phone {
-  bottom: 65px;
-  right: 150px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/flip-phone.png');
-  animation: vibrate 0.3s linear infinite;
-}
-
-.internet-1 {
-  top: 375px;
-  right: 100px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/internet.png');
-  animation: spin 20s linear infinite;
-}
-
-.internet-2 {
-  bottom: 400px;
-  left: 500px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/internet.png');
-  animation: spin 20s linear infinite;
-}
-
-.ipod {
-  top: 400px;
-  left: 100px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/ipod.png');
-}
-
-.jeans {
-  top: 500px;
-  right: 50px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/jeans.png');
-}
-
-.lion {
-  bottom: 280px;
-  left: 50px;
-  width: 100px;
-  height: 100px;
-  background-image: url('assets/lion.png');
-}
+.earth-1 { top: 10%; left: 10%; }
+.earth-2 { bottom: 10%; right: 10%; }
+.hockey-stick { top: 15%; right: 15%; }
+.basketball { bottom: 20%; left: 20%; }
+.bell-pepper { top: 30%; right: 25%; }
+.cowboy { bottom: 25%; left: 15%; }
+.drake { bottom: 15%; left: 5%; }
+.flip-phone { bottom: 20%; right: 25%; }
+.internet-1 { top: 40%; right: 20%; }
+.internet-2 { bottom: 35%; left: 30%; }
+.ipod { top: 45%; left: 15%; }
+.jeans { top: 55%; right: 10%; }
+.lion { bottom: 40%; left: 10%; }
 
 /* Animations */
 @keyframes spin {
@@ -661,4 +563,63 @@ button#view-all-btn-modal:hover {
 .music-player img {
   width: 50px;
   height: 50px;
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.background-image {
+  cursor: pointer;
+}
+
+.flip-phone-link {
+  position: relative;
+  display: inline-block;
+}
+
+.flip-phone-link .tooltiptext {
+  bottom: 100%;
+}
+
+button#tweet-prediction-btn {
+    background-color: #FFEB3B;
+    color: #000;
+    text-shadow: 1px 1px #000;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #00ff00;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+button#tweet-prediction-btn:hover {
+    background-color: #ff00ff;
+    color: #fff;
 }

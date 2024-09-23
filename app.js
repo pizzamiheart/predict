@@ -147,6 +147,26 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         });
     }
+
+    // Add event listener for the tweet button
+    const tweetButton = document.getElementById('tweet-prediction-btn');
+    if (tweetButton) {
+        tweetButton.addEventListener('click', () => {
+            const predictionText = document.getElementById('prediction').value;
+            const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(predictionText)}`;
+            window.open(tweetUrl, '_blank');
+        });
+    }
+
+    // Add event listener for the close modal button
+    const closeModalButton = document.querySelector('.close-modal');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', () => {
+            hideModal();
+        });
+    }
+
+    // Existing code...
 });
 
 let lastVisible = null;
