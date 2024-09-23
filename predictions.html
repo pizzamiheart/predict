@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>All Predictions</title>
     <link rel="stylesheet" href="stylesC.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
@@ -30,6 +31,16 @@
             cursor: pointer;
             text-decoration: none;
             color: #333;
+        }
+        @media (max-width: 768px) {
+            input[type="text"], textarea {
+                font-size: 16px;
+            }
+            
+            input[type="submit"], button {
+                min-height: 44px;
+                min-width: 44px;
+            }
         }
     </style>
 </head>
