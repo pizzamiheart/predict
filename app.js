@@ -11,6 +11,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const analytics = firebase.analytics();
 
 document.addEventListener('DOMContentLoaded', () => {
     const successSound = document.getElementById('success-sound');
@@ -68,6 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const predictionText = document.getElementById('prediction').value;
             const userName = document.getElementById('name').value || "Anonymous";
             const userLocation = document.getElementById('location').value || "Unknown";
+            analytics.logEvent('submit_prediction', {
+                prediction: predictionText,
+                name: userName,
+                location: userLocation
+            });
 
             try {
                 await db.collection('predictions').add({
@@ -77,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 successSound.play();
+                analytics.logEvent('prediction_submitted', { prediction_text: predictionText });
                 showModal(); // Show modal instead of alert
                 event.target.reset();
             } catch (error) {
