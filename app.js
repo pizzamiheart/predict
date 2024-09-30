@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('prediction-form')) {
         document.getElementById('prediction-form').addEventListener('submit', async (event) => {
+            console.log("Form submitted");
             event.preventDefault();
             const predictionText = document.getElementById('prediction').value;
             const userName = document.getElementById('name').value || "Anonymous";
@@ -101,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Failed to submit prediction: ' + error.message);
             }
         });
+        console.log("Submit event listener added");
+    } else {
+        console.error('Prediction form not found');
     }
 
     if (document.getElementById('view-all-btn')) {
