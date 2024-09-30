@@ -1,3 +1,5 @@
+console.log("Script started");
+
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAvzYf7shoyFOWyGKO9JX8F4pZDUJHjK50",
@@ -9,11 +11,19 @@ const firebaseConfig = {
     measurementId: "G-L29FL7MHCZ"
 };
 
-firebase.initializeApp(firebaseConfig);
+try {
+    firebase.initializeApp(firebaseConfig);
+    console.log("Firebase initialized successfully");
+} catch (error) {
+    console.error("Error initializing Firebase:", error);
+}
+
 const db = firebase.firestore();
 const analytics = firebase.analytics();
+console.log("Firebase initialized:", db, analytics);
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOMContentLoaded event fired");
     const successSound = document.getElementById('success-sound');
     const backgroundMusic = document.getElementById('background-music');
     let isMusicPlaying = false;
@@ -256,3 +266,5 @@ function rotatePlaceholder() {
 }
 
 document.addEventListener('DOMContentLoaded', rotatePlaceholder);
+
+console.log("End of script reached");
