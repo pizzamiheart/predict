@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>All Predictions</title>
     <link rel="stylesheet" href="stylesC.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
@@ -13,13 +13,21 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            overflow-x: hidden;
         }
         main {
             flex: 1;
             overflow-y: auto;
+            padding: 0 10px;
         }
         .predictions-container {
             padding-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
         }
         .nav-button {
             padding: 10px 15px;
@@ -33,19 +41,36 @@
             box-shadow: 0 0 5px #00ff00;
             margin: 20px 0;
             display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
         }
         .nav-button:hover {
             background-color: #ff00ff;
             color: #fff;
         }
         @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
             input[type="text"], textarea {
                 font-size: 16px;
             }
-            
             input[type="submit"], button {
                 min-height: 44px;
                 min-width: 44px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            .predictions-container {
+                padding: 10px 5px;
+            }
+            .nav-button {
+                padding: 8px 12px;
+                font-size: 14px;
             }
         }
     </style>

@@ -255,6 +255,7 @@ footer {
 }
 
 /* Position and Size of Images */
+/*
 .earth-1 {
   top: 50px;
   left: 100px;
@@ -272,6 +273,7 @@ footer {
   background-image: url('assets/earth.png');
   animation: spin 20s linear infinite;
 }
+*/
 
 .hockey-stick {
   top: 75px;
@@ -618,4 +620,61 @@ button {
     width: 50px;
     height: 50px;
   }
+}
+
+/* Adjust the main container to leave space for the images */
+main {
+    padding-bottom: 120px; /* Increase this value if needed */
+}
+
+/* Position the earth and internet images */
+.earth-1, .internet-1 {
+    position: fixed;
+    bottom: 80px; /* Adjust this value to position above the footer */
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
+}
+
+.earth-1 {
+    left: calc(50% - 55px); /* Position to the left of center */
+}
+
+.internet-1 {
+    left: calc(50% + 55px); /* Position to the right of center */
+}
+
+/* Hide the duplicate images */
+.earth-2, .internet-2 {
+    display: none;
+}
+
+/* Ensure the footer stays at the bottom */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000033; /* Match your body background color */
+    padding: 10px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .earth-1, .internet-1 {
+        width: 40px; /* Smaller size for mobile */
+        height: 40px;
+        bottom: 60px; /* Closer to the footer on mobile */
+    }
+
+    .earth-1 {
+        left: calc(50% - 35px);
+    }
+
+    .internet-1 {
+        left: calc(50% + 35px);
+    }
+
+    main {
+        padding-bottom: 100px; /* Adjust for mobile */
+    }
 }
