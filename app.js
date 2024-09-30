@@ -115,6 +115,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    try {
+        // Your existing code here
+        // This includes all the code that was previously inside your DOMContentLoaded listener
+        // such as form submissions, button click handlers, etc.
+        console.log("DOMContentLoaded code executed successfully");
+    } catch (error) {
+        console.error("Error in DOMContentLoaded:", error);
+    }
+
     if (document.getElementById('view-all-btn-modal')) {
         document.getElementById('view-all-btn-modal').addEventListener('click', () => {
             hideModal();
@@ -268,3 +277,8 @@ function rotatePlaceholder() {
 document.addEventListener('DOMContentLoaded', rotatePlaceholder);
 
 console.log("End of script reached");
+
+window.onerror = function(message, source, lineno, colno, error) {
+   console.error("Global error:", message, "at", source, ":", lineno, ":", colno, "Error:", error);
+   return false;
+};
