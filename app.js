@@ -110,15 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
+                const sanitizedPrediction = sanitizeInput(predictionText);
                 await db.collection('predictions').add({
                     name: userName,
                     location: userLocation,
-                    prediction: predictionText,
+                    prediction: sanitizedPrediction,
                     time_stamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 successSound.play();
                 if (analytics) {
-                    analytics.logEvent('prediction_submitted', { prediction_text: predictionText });
+                    analytics.logEvent('prediction_submitted', { prediction_text: sanitizedPrediction });
                 }
                 showModal(); // Show modal instead of alert
                 event.target.reset();
@@ -327,3 +328,9 @@ window.onerror = function(message, source, lineno, colno, error) {
    console.error("Global error:", message, "at", source, ":", lineno, ":", colno, "Error:", error);
    return false;
 };
+
+function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
