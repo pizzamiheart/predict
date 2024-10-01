@@ -621,18 +621,18 @@ button {
 }
 
 /* Predictions page specific styles */
-.predictions-container {
+.predictions-page .predictions-container {
     width: 90%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px 10px;
+    padding: 10px;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(100vh - 200px); /* Adjust based on your header and footer height */
+    max-height: calc(100vh - 170px); /* Adjusted to leave more space for footer */
 }
 
-.prediction {
+.predictions-page .prediction {
     background-color: #333333;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -642,7 +642,7 @@ button {
     word-wrap: break-word;
 }
 
-.prediction-header {
+.predictions-page .prediction-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -652,28 +652,29 @@ button {
     border-bottom: 1px solid #ffcc00;
 }
 
-.prediction-name {
+.predictions-page .prediction-name {
     font-weight: bold;
     color: #ffcc00;
     margin-right: 10px;
 }
 
-.prediction-date {
+.predictions-page .prediction-date {
     font-size: 0.8em;
     color: #ff66ff;
 }
 
-.prediction-body {
+.predictions-page .prediction-body {
     color: #ffffff;
 }
 
 /* Style the "Back to Home" button to match other buttons */
-.nav-button {
-    display: block;
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px;
+.predictions-page .nav-button {
+    display: inline-block;
+    width: auto;
+    min-width: 120px;
+    max-width: 80%;
+    margin: 10px auto;
+    padding: 8px 15px;
     background-color: #FFEB3B;
     color: #000000;
     text-align: center;
@@ -681,32 +682,38 @@ button {
     border: 2px solid #00ff00;
     border-radius: 8px;
     font-weight: bold;
+    font-size: 14px;
     box-shadow: 0 0 5px #00ff00;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.nav-button:hover {
+.predictions-page .nav-button:hover {
     background-color: #ff00ff;
     color: #ffffff;
 }
 
+.predictions-page main {
+    padding-bottom: 60px; /* Add some padding at the bottom to ensure visibility of last prediction */
+}
+
+.predictions-page footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000033; /* Match your body background color */
+    padding: 10px 0;
+    text-align: center;
+}
+
 @media (max-width: 480px) {
-    .predictions-container,
-    .nav-button {
+    .predictions-page .nav-button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .predictions-page .predictions-container {
         width: 95%;
-    }
-
-    .prediction {
-        padding: 10px;
-    }
-
-    .prediction-header {
-        flex-direction: column;
-    }
-
-    .prediction-name,
-    .prediction-date {
-        width: 100%;
-        margin-bottom: 5px;
+        padding: 5px;
     }
 }
