@@ -624,12 +624,13 @@ button {
 .predictions-page .predictions-container {
     width: 90%;
     max-width: 600px;
-    margin: 0 auto;
-    padding: 10px;
+    margin: 0 auto 20px; /* Added bottom margin */
+    padding: 10px 10px 20px; /* Increased bottom padding */
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(100vh - 170px); /* Adjusted to leave more space for footer */
+    max-height: calc(100vh - 220px); /* Reduced height to accommodate footer and rounded bottom */
+    border-radius: 10px; /* Ensure this is set for both top and bottom */
 }
 
 .predictions-page .prediction {
@@ -693,7 +694,10 @@ button {
 }
 
 .predictions-page main {
-    padding-bottom: 60px; /* Add some padding at the bottom to ensure visibility of last prediction */
+    padding-bottom: 80px; /* Increased padding at the bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .predictions-page footer {
@@ -706,6 +710,11 @@ button {
     text-align: center;
 }
 
+/* Ensure the last prediction doesn't get cut off */
+.predictions-page .prediction:last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 480px) {
     .predictions-page .nav-button {
         font-size: 12px;
@@ -714,6 +723,11 @@ button {
     
     .predictions-page .predictions-container {
         width: 95%;
-        padding: 5px;
+        padding: 5px 5px 15px; /* Adjusted padding for mobile */
+        margin-bottom: 15px; /* Adjusted margin for mobile */
+    }
+    
+    .predictions-page main {
+        padding-bottom: 70px; /* Slightly reduced padding for mobile */
     }
 }
