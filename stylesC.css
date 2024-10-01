@@ -265,7 +265,7 @@ footer {
 }
 
 .earth-2 {
-  bottom: 20px;
+  bottom: 100px;
   left: 500px;
   width: 100px;
   height: 100px;
@@ -618,4 +618,95 @@ button {
     width: 50px;
     height: 50px;
   }
+}
+
+/* Predictions page specific styles */
+.predictions-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 200px); /* Adjust based on your header and footer height */
+}
+
+.prediction {
+    background-color: #333333;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    border: 2px solid #ff00ff;
+    word-wrap: break-word;
+}
+
+.prediction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ffcc00;
+}
+
+.prediction-name {
+    font-weight: bold;
+    color: #ffcc00;
+    margin-right: 10px;
+}
+
+.prediction-date {
+    font-size: 0.8em;
+    color: #ff66ff;
+}
+
+.prediction-body {
+    color: #ffffff;
+}
+
+/* Style the "Back to Home" button to match other buttons */
+.nav-button {
+    display: block;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #FFEB3B;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 0 5px #00ff00;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #ff00ff;
+    color: #ffffff;
+}
+
+@media (max-width: 480px) {
+    .predictions-container,
+    .nav-button {
+        width: 95%;
+    }
+
+    .prediction {
+        padding: 10px;
+    }
+
+    .prediction-header {
+        flex-direction: column;
+    }
+
+    .prediction-name,
+    .prediction-date {
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }
